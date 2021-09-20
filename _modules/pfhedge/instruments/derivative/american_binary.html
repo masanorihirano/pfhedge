@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" />
 
-    <meta name="generator" content="sphinx-4.1.2, furo 2021.08.31"/>
+    <meta name="generator" content="sphinx-4.2.0, furo 2021.09.08"/>
         <title>pfhedge.instruments.derivative.american_binary - PFHedge documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?digest=c7c65a82b42f6b978e58466c1e9ef2509836d916" />
@@ -222,7 +222,7 @@
   </aside>
   <div class="main">
     <div class="content">
-      <article role="main">
+      <div class="article-container">
         <div class="content-icon-container">
           <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
@@ -237,7 +237,8 @@
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
-        <h1>Source code for pfhedge.instruments.derivative.american_binary</h1><div class="highlight"><pre>
+        <article role="main">
+          <h1>Source code for pfhedge.instruments.derivative.american_binary</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">import</span> <span class="nn">torch</span>
@@ -289,19 +290,14 @@
 
 <span class="sd">    Here, :math:`\\mathrm{Min}` is the minimum of the underlying asset's price.</span>
 
+<span class="sd">    .. seealso::</span>
+<span class="sd">        :func:`pfhedge.nn.functional.american_binary_payoff`: Payoff function.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        underlier (:class:`Primary`): The underlying instrument of the option.</span>
 <span class="sd">        call (bool, default=True): Specifies whether the option is call or put.</span>
 <span class="sd">        strike (float, default=1.0): The strike price of the option.</span>
 <span class="sd">        maturity (float, default=20/250): The maturity of the option.</span>
-<span class="sd">        dtype (torch.device, optional): Desired device of returned tensor.</span>
-<span class="sd">            Default: If None, uses a global default</span>
-<span class="sd">            (see :func:`torch.set_default_tensor_type()`).</span>
-<span class="sd">        device (torch.device, optional): Desired device of returned tensor.</span>
-<span class="sd">            Default: if None, uses the current device for the default tensor type</span>
-<span class="sd">            (see :func:`torch.set_default_tensor_type()`).</span>
-<span class="sd">            ``device`` will be the CPU for CPU tensor types and</span>
-<span class="sd">            the current CUDA device for CUDA tensor types.</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        dtype (torch.dtype): The dtype with which the simulated time-series are</span>
@@ -339,7 +335,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">call</span> <span class="o">=</span> <span class="n">call</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">strike</span> <span class="o">=</span> <span class="n">strike</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">maturity</span> <span class="o">=</span> <span class="n">maturity</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="c1"># TODO(simaki): Remove later. Deprecated for &gt; v0.12.3</span>
+        <span class="k">if</span> <span class="n">dtype</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">device</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">DeprecationWarning</span><span class="p">(</span>
+                <span class="s2">"Specifying device and dtype when constructing a Derivative is deprecated."</span>
+                <span class="s2">"Specify them in the constructor of the underlier instead."</span>
+            <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">extra_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">[]</span>
@@ -349,10 +352,10 @@
         <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"maturity="</span> <span class="o">+</span> <span class="n">_format_float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maturity</span><span class="p">))</span>
         <span class="k">return</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AmericanBinaryOption.payoff"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.AmericanBinaryOption.html#pfhedge.instruments.AmericanBinaryOption.payoff">[docs]</a>    <span class="k">def</span> <span class="nf">payoff</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">payoff_fn</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">american_binary_payoff</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ul</span><span class="p">()</span><span class="o">.</span><span class="n">spot</span><span class="p">,</span> <span class="n">call</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">,</span> <span class="n">strike</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">strike</span>
-        <span class="p">)</span></div></div>
+        <span class="p">)</span></div>
 
 
 <span class="c1"># Assign docstrings so they appear in Sphinx documentation</span>
@@ -367,7 +370,8 @@
     <span class="n">AmericanBinaryOption</span><span class="p">,</span> <span class="s2">"time_to_maturity"</span><span class="p">,</span> <span class="n">BaseOption</span><span class="o">.</span><span class="n">time_to_maturity</span>
 <span class="p">)</span>
 </pre></div>
-      </article>
+        </article>
+      </div>
       <footer>
         
         <div class="related-pages">
@@ -376,8 +380,7 @@
         </div>
 
         <div class="related-information">
-              Copyright &#169; 2021, pfnet-research
-            |
+              Copyright &#169; 2021, pfnet-research |
             Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
               and
               <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
