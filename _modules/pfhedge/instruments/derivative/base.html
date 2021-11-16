@@ -4,12 +4,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" />
 
-    <meta name="generator" content="sphinx-4.2.0, furo 2021.09.08"/>
+    <meta name="generator" content="sphinx-4.3.0, furo 2021.11.15"/>
         <title>pfhedge.instruments.derivative.base - PFHedge documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?digest=c7c65a82b42f6b978e58466c1e9ef2509836d916" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?digest=916d6ed8f59335acffa15474ff504849343d4c76" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?digest=0af69da206d614734f649b27d4cdc2dd6c31f41d" />
     
     
 
@@ -183,13 +183,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../nn.functional.html">pfhedge.nn.functional</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../../instruments.html">pfhedge.instruments</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../../generated/pfhedge.instruments.Instrument.html">Instrument</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../generated/pfhedge.instruments.Primary.html">Primary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../generated/pfhedge.instruments.BaseInstrument.html">BaseInstrument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../generated/pfhedge.instruments.BasePrimary.html">BasePrimary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../generated/pfhedge.instruments.BaseDerivative.html">BaseDerivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../generated/pfhedge.instruments.BaseOption.html">BaseOption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../generated/pfhedge.instruments.BrownianStock.html">BrownianStock</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../generated/pfhedge.instruments.HestonStock.html">HestonStock</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../generated/pfhedge.instruments.CIRRate.html">CIRRate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../generated/pfhedge.instruments.Derivative.html">Derivative</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../generated/pfhedge.instruments.BaseOption.html">BaseOption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../generated/pfhedge.instruments.EuropeanOption.html">EuropeanOption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../generated/pfhedge.instruments.LookbackOption.html">LookbackOption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../generated/pfhedge.instruments.EuropeanBinaryOption.html">EuropeanBinaryOption</a></li>
@@ -256,13 +256,13 @@
 <span class="kn">from</span> <span class="nn">pfhedge._utils.str</span> <span class="kn">import</span> <span class="n">_addindent</span>
 <span class="kn">from</span> <span class="nn">pfhedge._utils.typing</span> <span class="kn">import</span> <span class="n">TensorOrScalar</span>
 
-<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">Instrument</span>
-<span class="kn">from</span> <span class="nn">..primary.base</span> <span class="kn">import</span> <span class="n">Primary</span>
+<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">BaseInstrument</span>
+<span class="kn">from</span> <span class="nn">..primary.base</span> <span class="kn">import</span> <span class="n">BasePrimary</span>
 
-<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"T"</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">"Derivative"</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"T"</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">"BaseDerivative"</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="Derivative"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.Derivative.html#pfhedge.instruments.Derivative">[docs]</a><span class="k">class</span> <span class="nc">Derivative</span><span class="p">(</span><span class="n">Instrument</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseDerivative"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.BaseDerivative.html#pfhedge.instruments.BaseDerivative">[docs]</a><span class="k">class</span> <span class="nc">BaseDerivative</span><span class="p">(</span><span class="n">BaseInstrument</span><span class="p">):</span>
     <span class="sd">"""Base class for all derivatives.</span>
 
 <span class="sd">    A derivative is a financial instrument whose payoff is contingent on</span>
@@ -271,24 +271,24 @@
 <span class="sd">    is not directly accessible.</span>
 <span class="sd">    Examples include options and swaps.</span>
 
-<span class="sd">    A derivative relies on primary assets (See :class:`Primary` for details), such as</span>
+<span class="sd">    A derivative relies on primary assets (See :class:`BasePrimary` for details), such as</span>
 <span class="sd">    stocks, bonds, commodities, and currencies.</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">        underlier (:class:`Primary`): The underlying asset on which the derivative's</span>
+<span class="sd">        underlier (:class:`BasePrimary`): The underlying asset on which the derivative's</span>
 <span class="sd">            payoff relies.</span>
 <span class="sd">        dtype (torch.dtype): The dtype with which the simulated time-series are</span>
 <span class="sd">            represented.</span>
 <span class="sd">        device (torch.device): The device where the simulated time-series are.</span>
 <span class="sd">    """</span>
 
-    <span class="n">underlier</span><span class="p">:</span> <span class="n">Primary</span>
+    <span class="n">underlier</span><span class="p">:</span> <span class="n">BasePrimary</span>
     <span class="n">cost</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">maturity</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">pricer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Tensor</span><span class="p">]]</span>
-    <span class="n">_clauses</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="s2">"Derivative"</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">],</span> <span class="n">Tensor</span><span class="p">]]</span>
+    <span class="n">_clauses</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="s2">"BaseDerivative"</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">],</span> <span class="n">Tensor</span><span class="p">]]</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pricer</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cost</span> <span class="o">=</span> <span class="mf">0.0</span>
@@ -302,7 +302,7 @@
     <span class="k">def</span> <span class="nf">device</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">]:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">underlier</span><span class="o">.</span><span class="n">device</span>
 
-<div class="viewcode-block" id="Derivative.simulate"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.Derivative.html#pfhedge.instruments.Derivative.simulate">[docs]</a>    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span>
+<div class="viewcode-block" id="BaseDerivative.simulate"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.BaseDerivative.html#pfhedge.instruments.BaseDerivative.simulate">[docs]</a>    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">n_paths</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">init_state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">TensorOrScalar</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""Simulate time series associated with the underlier.</span>
@@ -317,15 +317,15 @@
             <span class="n">n_paths</span><span class="o">=</span><span class="n">n_paths</span><span class="p">,</span> <span class="n">time_horizon</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">maturity</span><span class="p">,</span> <span class="n">init_state</span><span class="o">=</span><span class="n">init_state</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="Derivative.ul"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.Derivative.html#pfhedge.instruments.Derivative.ul">[docs]</a>    <span class="k">def</span> <span class="nf">ul</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Primary</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseDerivative.ul"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.BaseDerivative.html#pfhedge.instruments.BaseDerivative.ul">[docs]</a>    <span class="k">def</span> <span class="nf">ul</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BasePrimary</span><span class="p">:</span>
         <span class="sd">"""Alias for ``self.underlier``."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">underlier</span></div>
 
-<div class="viewcode-block" id="Derivative.to"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.Derivative.html#pfhedge.instruments.Derivative.to">[docs]</a>    <span class="k">def</span> <span class="nf">to</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseDerivative.to"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.BaseDerivative.html#pfhedge.instruments.BaseDerivative.to">[docs]</a>    <span class="k">def</span> <span class="nf">to</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">underlier</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
-<div class="viewcode-block" id="Derivative.payoff_fn"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.Derivative.html#pfhedge.instruments.Derivative.payoff_fn">[docs]</a>    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="BaseDerivative.payoff_fn"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.BaseDerivative.html#pfhedge.instruments.BaseDerivative.payoff_fn">[docs]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">payoff_fn</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
         <span class="sd">"""Defines the payoff function of the derivative.</span>
 
@@ -346,7 +346,7 @@
 <span class="sd">            torch.Tensor</span>
 <span class="sd">        """</span></div>
 
-<div class="viewcode-block" id="Derivative.payoff"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.Derivative.html#pfhedge.instruments.Derivative.payoff">[docs]</a>    <span class="k">def</span> <span class="nf">payoff</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseDerivative.payoff"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.BaseDerivative.html#pfhedge.instruments.BaseDerivative.payoff">[docs]</a>    <span class="k">def</span> <span class="nf">payoff</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
         <span class="sd">"""Returns the payoff of the derivative.</span>
 
 <span class="sd">        Shape:</span>
@@ -361,7 +361,7 @@
             <span class="n">payoff</span> <span class="o">=</span> <span class="n">clause</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payoff</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">payoff</span></div>
 
-<div class="viewcode-block" id="Derivative.list"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.Derivative.html#pfhedge.instruments.Derivative.list">[docs]</a>    <span class="k">def</span> <span class="nf">list</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">pricer</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">T</span><span class="p">],</span> <span class="n">Tensor</span><span class="p">],</span> <span class="n">cost</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseDerivative.list"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.BaseDerivative.html#pfhedge.instruments.BaseDerivative.list">[docs]</a>    <span class="k">def</span> <span class="nf">list</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">pricer</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">T</span><span class="p">],</span> <span class="n">Tensor</span><span class="p">],</span> <span class="n">cost</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""Make self a listed derivative.</span>
 
 <span class="sd">        After this method self will be a exchange-traded derivative which can be transacted</span>
@@ -370,15 +370,15 @@
 <span class="sd">        See an example in :class:`EuropeanOption` for a usage.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            pricer (Callable[[Derivative], Tensor]]): A function that takes self</span>
+<span class="sd">            pricer (Callable[[BaseDerivative], Tensor]]): A function that takes self</span>
 <span class="sd">                and returns the spot price tensor of self.</span>
 <span class="sd">            cost (float, optional): The transaction cost rate.</span>
 <span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pricer</span> <span class="o">=</span> <span class="n">pricer</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cost</span> <span class="o">=</span> <span class="n">cost</span></div>
 
-<div class="viewcode-block" id="Derivative.add_clause"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.Derivative.html#pfhedge.instruments.Derivative.add_clause">[docs]</a>    <span class="k">def</span> <span class="nf">add_clause</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">clause</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="s2">"Derivative"</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">],</span> <span class="n">Tensor</span><span class="p">]</span>
+<div class="viewcode-block" id="BaseDerivative.add_clause"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.BaseDerivative.html#pfhedge.instruments.BaseDerivative.add_clause">[docs]</a>    <span class="k">def</span> <span class="nf">add_clause</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">clause</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="s2">"BaseDerivative"</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">],</span> <span class="n">Tensor</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""Adds a clause to the derivative.</span>
 
@@ -390,7 +390,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            name (str): The name of the clause.</span>
-<span class="sd">            clause (callable[[Derivative, torch.Tensor], torch.Tensor]):</span>
+<span class="sd">            clause (callable[[BaseDerivative, torch.Tensor], torch.Tensor]):</span>
 <span class="sd">                The clause to add.</span>
 <span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">_six</span><span class="o">.</span><span class="n">string_classes</span><span class="p">):</span>
@@ -427,10 +427,18 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_name</span><span class="p">()</span> <span class="o">+</span> <span class="s2">"("</span> <span class="o">+</span> <span class="n">params_str</span> <span class="o">+</span> <span class="s2">")"</span></div>
 
 
-<div class="viewcode-block" id="BaseOption"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.BaseOption.html#pfhedge.instruments.BaseOption">[docs]</a><span class="k">class</span> <span class="nc">BaseOption</span><span class="p">(</span><span class="n">Derivative</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Derivative</span><span class="p">(</span><span class="n">BaseDerivative</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">DeprecationWarning</span><span class="p">(</span>
+            <span class="s2">"Derivative is deprecated. Use BaseDerivative instead."</span>
+        <span class="p">)</span>
+
+
+<div class="viewcode-block" id="BaseOption"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.BaseOption.html#pfhedge.instruments.BaseOption">[docs]</a><span class="k">class</span> <span class="nc">BaseOption</span><span class="p">(</span><span class="n">BaseDerivative</span><span class="p">):</span>
     <span class="sd">"""Base class of options."""</span>
 
-    <span class="n">underlier</span><span class="p">:</span> <span class="n">Primary</span>
+    <span class="n">underlier</span><span class="p">:</span> <span class="n">BasePrimary</span>
     <span class="n">strike</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">maturity</span><span class="p">:</span> <span class="nb">float</span>
 
@@ -493,7 +501,9 @@
             <span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="n">time</span><span class="p">]])</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">underlier</span><span class="o">.</span><span class="n">spot</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">underlier</span><span class="o">.</span><span class="n">dt</span>
             <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">n_paths</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseOption.max_moneyness"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.BaseOption.html#pfhedge.instruments.BaseOption.max_moneyness">[docs]</a>    <span class="k">def</span> <span class="nf">max_moneyness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_step</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseOption.max_moneyness"><a class="viewcode-back" href="../../../../generated/pfhedge.instruments.BaseOption.html#pfhedge.instruments.BaseOption.max_moneyness">[docs]</a>    <span class="k">def</span> <span class="nf">max_moneyness</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">time_step</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">log</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
         <span class="sd">"""Returns the cumulative maximum of the moneyness.</span>
 
 <span class="sd">        Args:</span>
@@ -528,12 +538,12 @@
 
 
 <span class="c1"># Assign docstrings so they appear in Sphinx documentation</span>
-<span class="n">_set_docstring</span><span class="p">(</span><span class="n">Derivative</span><span class="p">,</span> <span class="s2">"to"</span><span class="p">,</span> <span class="n">Instrument</span><span class="o">.</span><span class="n">to</span><span class="p">)</span>
-<span class="n">_set_attr_and_docstring</span><span class="p">(</span><span class="n">Derivative</span><span class="p">,</span> <span class="s2">"cpu"</span><span class="p">,</span> <span class="n">Instrument</span><span class="o">.</span><span class="n">cpu</span><span class="p">)</span>
-<span class="n">_set_attr_and_docstring</span><span class="p">(</span><span class="n">Derivative</span><span class="p">,</span> <span class="s2">"cuda"</span><span class="p">,</span> <span class="n">Instrument</span><span class="o">.</span><span class="n">cuda</span><span class="p">)</span>
-<span class="n">_set_attr_and_docstring</span><span class="p">(</span><span class="n">Derivative</span><span class="p">,</span> <span class="s2">"double"</span><span class="p">,</span> <span class="n">Instrument</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
-<span class="n">_set_attr_and_docstring</span><span class="p">(</span><span class="n">Derivative</span><span class="p">,</span> <span class="s2">"float"</span><span class="p">,</span> <span class="n">Instrument</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
-<span class="n">_set_attr_and_docstring</span><span class="p">(</span><span class="n">Derivative</span><span class="p">,</span> <span class="s2">"half"</span><span class="p">,</span> <span class="n">Instrument</span><span class="o">.</span><span class="n">half</span><span class="p">)</span>
+<span class="n">_set_docstring</span><span class="p">(</span><span class="n">BaseDerivative</span><span class="p">,</span> <span class="s2">"to"</span><span class="p">,</span> <span class="n">BaseInstrument</span><span class="o">.</span><span class="n">to</span><span class="p">)</span>
+<span class="n">_set_attr_and_docstring</span><span class="p">(</span><span class="n">BaseDerivative</span><span class="p">,</span> <span class="s2">"cpu"</span><span class="p">,</span> <span class="n">BaseInstrument</span><span class="o">.</span><span class="n">cpu</span><span class="p">)</span>
+<span class="n">_set_attr_and_docstring</span><span class="p">(</span><span class="n">BaseDerivative</span><span class="p">,</span> <span class="s2">"cuda"</span><span class="p">,</span> <span class="n">BaseInstrument</span><span class="o">.</span><span class="n">cuda</span><span class="p">)</span>
+<span class="n">_set_attr_and_docstring</span><span class="p">(</span><span class="n">BaseDerivative</span><span class="p">,</span> <span class="s2">"double"</span><span class="p">,</span> <span class="n">BaseInstrument</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+<span class="n">_set_attr_and_docstring</span><span class="p">(</span><span class="n">BaseDerivative</span><span class="p">,</span> <span class="s2">"float"</span><span class="p">,</span> <span class="n">BaseInstrument</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="n">_set_attr_and_docstring</span><span class="p">(</span><span class="n">BaseDerivative</span><span class="p">,</span> <span class="s2">"half"</span><span class="p">,</span> <span class="n">BaseInstrument</span><span class="o">.</span><span class="n">half</span><span class="p">)</span>
 </pre></div>
         </article>
       </div>
@@ -546,10 +556,8 @@
 
         <div class="related-information">
               Copyright &#169; 2021, pfnet-research |
-            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
-              and
-              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+          Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
         </div>
         
       </footer>
@@ -564,7 +572,7 @@
     <script src="../../../../_static/jquery.js"></script>
     <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
-    <script src="../../../../_static/scripts/main.js"></script>
+    <script src="../../../../_static/scripts/furo.js"></script>
     <script src="../../../../_static/clipboard.min.js"></script>
     <script src="../../../../_static/copybutton.js"></script>
     </body>

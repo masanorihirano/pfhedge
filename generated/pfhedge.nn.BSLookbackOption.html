@@ -5,12 +5,12 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="WhalleyWilmott" href="pfhedge.nn.WhalleyWilmott.html" /><link rel="prev" title="BSEuropeanBinaryOption" href="pfhedge.nn.BSEuropeanBinaryOption.html" />
 
-    <meta name="generator" content="sphinx-4.2.0, furo 2021.09.08"/>
+    <meta name="generator" content="sphinx-4.3.0, furo 2021.11.15"/>
         <title>BSLookbackOption - PFHedge documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=c7c65a82b42f6b978e58466c1e9ef2509836d916" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=916d6ed8f59335acffa15474ff504849343d4c76" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=0af69da206d614734f649b27d4cdc2dd6c31f41d" />
     
     
 
@@ -184,13 +184,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../nn.functional.html">pfhedge.nn.functional</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../instruments.html">pfhedge.instruments</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.Instrument.html">Instrument</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.Primary.html">Primary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.BaseInstrument.html">BaseInstrument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.BasePrimary.html">BasePrimary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.BaseDerivative.html">BaseDerivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.BaseOption.html">BaseOption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.BrownianStock.html">BrownianStock</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.HestonStock.html">HestonStock</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.CIRRate.html">CIRRate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.Derivative.html">Derivative</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.BaseOption.html">BaseOption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.EuropeanOption.html">EuropeanOption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.LookbackOption.html">LookbackOption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.EuropeanBinaryOption.html">EuropeanBinaryOption</a></li>
@@ -243,14 +243,34 @@
 <h1>BSLookbackOption<a class="headerlink" href="#bslookbackoption" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pfhedge.nn.BSLookbackOption">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pfhedge.nn.</span></span><span class="sig-name descname"><span class="pre">BSLookbackOption</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">call</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strike</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pfhedge/nn/modules/bs/lookback.html#BSLookbackOption"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pfhedge.nn.BSLookbackOption" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pfhedge.nn.</span></span><span class="sig-name descname"><span class="pre">BSLookbackOption</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">call</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strike</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pfhedge/nn/modules/bs/lookback.html#BSLookbackOption"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pfhedge.nn.BSLookbackOption" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pfhedge.nn.modules.bs._base.BSModuleMixin</span></code></p>
 <p>Black-Scholes formula for a lookback option with a fixed strike.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Risk-free rate is set to zero.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="pfhedge.nn.BlackScholes.html#pfhedge.nn.BlackScholes" title="pfhedge.nn.BlackScholes"><code class="xref py py-class docutils literal notranslate"><span class="pre">pfhedge.nn.BlackScholes</span></code></a>:
+Initialize Black-Scholes formula module from a derivative.</p></li>
+<li><p><a class="reference internal" href="pfhedge.instruments.LookbackOption.html#pfhedge.instruments.LookbackOption" title="pfhedge.instruments.LookbackOption"><code class="xref py py-class docutils literal notranslate"><span class="pre">pfhedge.instruments.LookbackOption</span></code></a>:
+Corresponding derivative.</p></li>
+</ul>
+</div>
+<div class="admonition-references admonition">
+<p class="admonition-title">References</p>
+<ul class="simple">
+<li><p>Conze, A., 1991. Path dependent options: The case of lookback options.
+The Journal of Finance, 46(5), pp.1893-1907.</p></li>
+</ul>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>call</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><em>default=True</em>) – Specifies whether the option is call or put.</p></li>
-<li><p><strong>strike</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>, </em><em>default=1.0</em>) – The strike price of the option.</p></li>
+<li><p><strong>call</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>default=True</em>) – Specifies whether the option is call or put.</p></li>
+<li><p><strong>strike</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>, </em><em>default=1.0</em>) – The strike price of the option.</p></li>
 </ul>
 </dd>
 </dl>
@@ -264,20 +284,6 @@ All but the last dimension are the same shape as the input.</p></li>
 </ul>
 </dd>
 </dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="pfhedge.nn.BlackScholes.html#pfhedge.nn.BlackScholes" title="pfhedge.nn.BlackScholes"><code class="xref py py-class docutils literal notranslate"><span class="pre">pfhedge.nn.BlackScholes</span></code></a>:
-Initialize Black-Scholes formula module from a derivative.</p></li>
-</ul>
-</div>
-<div class="admonition-references admonition">
-<p class="admonition-title">References</p>
-<ul class="simple">
-<li><p>Conze, A., 1991. Path dependent options: The case of lookback options.
-The Journal of Finance, 46(5), pp.1893-1907.</p></li>
-</ul>
-</div>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pfhedge.nn</span> <span class="kn">import</span> <span class="n">BSLookbackOption</span>
 <span class="go">&gt;&gt;&gt;</span>
@@ -301,11 +307,11 @@ The Journal of Finance, 46(5), pp.1893-1907.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Log moneyness of the underlying asset.</p></li>
-<li><p><strong>max_log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Cumulative maximum of the log moneyness.</p></li>
-<li><p><strong>time_to_maturity</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Time to expiry of the option.</p></li>
-<li><p><strong>volatility</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Volatility of the underlying asset.</p></li>
-<li><p><strong>create_graph</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><em>default=False</em>) – If True, graph of the derivative
+<li><p><strong>log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Log moneyness of the underlying asset.</p></li>
+<li><p><strong>max_log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Cumulative maximum of the log moneyness.</p></li>
+<li><p><strong>time_to_maturity</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Time to expiry of the option.</p></li>
+<li><p><strong>volatility</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Volatility of the underlying asset.</p></li>
+<li><p><strong>create_graph</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>default=False</em>) – If True, graph of the derivative
 will be constructed. This option is used to compute gamma.</p></li>
 </ul>
 </dd>
@@ -333,7 +339,7 @@ will be constructed. This option is used to compute gamma.</p></li>
 <dd><p>Returns delta of the derivative.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>input</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – The input tensor. Features are concatenated along
+<dd class="field-odd"><p><strong>input</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – The input tensor. Features are concatenated along
 the last dimension.
 See <a class="reference internal" href="#pfhedge.nn.BSLookbackOption.inputs" title="pfhedge.nn.BSLookbackOption.inputs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">inputs()</span></code></a> for the names of the input features.</p>
 </dd>
@@ -344,7 +350,7 @@ See <a class="reference internal" href="#pfhedge.nn.BSLookbackOption.inputs" tit
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="pfhedge.nn.BSLookbackOption.from_derivative">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_derivative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">derivative</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pfhedge/nn/modules/bs/lookback.html#BSLookbackOption.from_derivative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pfhedge.nn.BSLookbackOption.from_derivative" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_derivative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">derivative</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pfhedge/nn/modules/bs/lookback.html#BSLookbackOption.from_derivative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pfhedge.nn.BSLookbackOption.from_derivative" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a module from a derivative.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -372,10 +378,10 @@ See <a class="reference internal" href="#pfhedge.nn.BSLookbackOption.inputs" tit
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Log moneyness of the underlying asset.</p></li>
-<li><p><strong>max_log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Cumulative maximum of the log moneyness.</p></li>
-<li><p><strong>time_to_maturity</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Time to expiry of the option.</p></li>
-<li><p><strong>volatility</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Volatility of the underlying asset.</p></li>
+<li><p><strong>log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Log moneyness of the underlying asset.</p></li>
+<li><p><strong>max_log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Cumulative maximum of the log moneyness.</p></li>
+<li><p><strong>time_to_maturity</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Time to expiry of the option.</p></li>
+<li><p><strong>volatility</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Volatility of the underlying asset.</p></li>
 </ul>
 </dd>
 </dl>
@@ -403,11 +409,11 @@ See <a class="reference internal" href="#pfhedge.nn.BSLookbackOption.inputs" tit
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Log moneyness of the underlying asset.</p></li>
-<li><p><strong>max_log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Cumulative maximum of the log moneyness.</p></li>
-<li><p><strong>time_to_maturity</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Time to expiry of the option.</p></li>
-<li><p><strong>price</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Price of the derivative.</p></li>
-<li><p><strong>precision</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>, </em><em>default=1e-6</em>) – Precision of the implied volatility.</p></li>
+<li><p><strong>log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Log moneyness of the underlying asset.</p></li>
+<li><p><strong>max_log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Cumulative maximum of the log moneyness.</p></li>
+<li><p><strong>time_to_maturity</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Time to expiry of the option.</p></li>
+<li><p><strong>price</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Price of the derivative.</p></li>
+<li><p><strong>precision</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>, </em><em>default=1e-6</em>) – Precision of the implied volatility.</p></li>
 </ul>
 </dd>
 </dl>
@@ -442,13 +448,29 @@ See <a class="reference internal" href="#pfhedge.nn.BSLookbackOption.inputs" tit
 <dt class="sig sig-object py" id="pfhedge.nn.BSLookbackOption.price">
 <span class="sig-name descname"><span class="pre">price</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_moneyness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_log_moneyness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_to_maturity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volatility</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pfhedge/nn/modules/bs/lookback.html#BSLookbackOption.price"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pfhedge.nn.BSLookbackOption.price" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns price of the derivative.</p>
+<p>The price is given by:</p>
+<div class="math-wrapper"><div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases}
+    S(0) \{
+        N(d_1) + \sigma \sqrt{T} [N'(d_1) + d_1 N(d_1)]
+    \} - K N(d_2)
+    &amp; (M \leq K) \\
+    S(0) \{
+        N(d_1') + \sigma \sqrt{T} [N'(d_1') + d_1' N(d_1')]
+    \} - K + M [1 - N(d_2')]
+    &amp; (M &gt; K) \\
+\end{cases}\end{split}\]</div></div>
+<p>where
+<span class="math notranslate nohighlight">\(M = \max_{t &lt; 0} S(t)\)</span>,
+<span class="math notranslate nohighlight">\(d_1' = [\log(S(0) / M) + \frac12 \sigma^2 T] / \sigma \sqrt{T}\)</span>, and
+<span class="math notranslate nohighlight">\(d_2' = [\log(S(0) / M) - \frac12 \sigma^2 T] / \sigma \sqrt{T}\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Log moneyness of the underlying asset.</p></li>
-<li><p><strong>max_log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Cumulative maximum of the log moneyness.</p></li>
-<li><p><strong>time_to_maturity</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Time to expiry of the option.</p></li>
-<li><p><strong>volatility</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.0a0+gitd69c22d)"><em>torch.Tensor</em></a>) – Volatility of the underlying asset.</p></li>
+<li><p><strong>log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Log moneyness of the underlying asset.</p></li>
+<li><p><strong>max_log_moneyness</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Cumulative maximum of the log moneyness.</p></li>
+<li><p><strong>time_to_maturity</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Time to expiry of the option.</p></li>
+<li><p><strong>volatility</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Volatility of the underlying asset.</p></li>
 </ul>
 </dd>
 </dl>
@@ -501,11 +523,9 @@ See <a class="reference internal" href="#pfhedge.nn.BSLookbackOption.inputs" tit
 
         <div class="related-information">
               Copyright &#169; 2021, pfnet-research |
-            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
-              and
-              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-              <a href="https://github.com/pradyunsg/furo">Furo theme</a>. |
-            <a class="muted-link" href="../_sources/generated/pfhedge.nn.BSLookbackOption.rst.txt"
+          Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            | <a class="muted-link" href="../_sources/generated/pfhedge.nn.BSLookbackOption.rst.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -523,9 +543,9 @@ See <a class="reference internal" href="#pfhedge.nn.BSLookbackOption.inputs" tit
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/main.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>
