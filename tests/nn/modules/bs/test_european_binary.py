@@ -530,28 +530,29 @@ class TestBSEuropeanBinaryOption(_TestBSModule):
     def test_vega_and_gamma_2_gpu(self, call: bool):
         self.test_vega_and_gamma_2(call, device="cuda")
 
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_theta_2(
-    #     self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
-    # ):
-    #     m = BSEuropeanBinaryOption(call=call).to(device)
-    #     with pytest.raises(ValueError):
-    #         m.theta(
-    #             torch.tensor(0.0).to(device),
-    #             torch.tensor(-1.0).to(device),
-    #             torch.tensor(0.2).to(device),
-    #         )
-    #     with pytest.raises(ValueError):
-    #         m.theta(
-    #             torch.tensor(0.0).to(device),
-    #             torch.tensor(1.0).to(device),
-    #             torch.tensor(-0.2).to(device),
-    #         )
-    #
-    # @pytest.mark.gpu
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_theta_2_gpu(self, call: bool):
-    #     self.test_theta_2(call, device="cuda")
+    @pytest.mark.parametrize("call", [True, False])
+    def test_theta_2(
+        self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
+    ):
+        m = BSEuropeanBinaryOption(call=call).to(device)
+        with pytest.raises(ValueError):
+            m.theta(
+                torch.tensor(0.0).to(device),
+                torch.tensor(-1.0).to(device),
+                torch.tensor(0.2).to(device),
+            )
+        with pytest.raises(ValueError):
+            m.theta(
+                torch.tensor(0.0).to(device),
+                torch.tensor(1.0).to(device),
+                torch.tensor(-0.2).to(device),
+            )
+
+    @pytest.mark.gpu
+    @pytest.mark.parametrize("call", [True, False])
+    def test_theta_2_gpu(self, call: bool):
+        self.test_theta_2(call, device="cuda")
+
     #
     # @pytest.mark.parametrize("call", [True, False])
     # def test_theta_3(
