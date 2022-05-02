@@ -506,29 +506,29 @@ class TestBSEuropeanBinaryOption(_TestBSModule):
     def test_vega_and_gamma_gpu(self):
         self.test_vega_and_gamma(device="cuda")
 
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_vega_and_gamma_2(
-    #     self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
-    # ):
-    #     derivative = EuropeanBinaryOption(BrownianStock(), call=call).to(device)
-    #     m = BSEuropeanBinaryOption.from_derivative(derivative).to(device)
-    #     torch.manual_seed(42)
-    #     derivative.simulate(n_paths=1)
-    #     vega = m.vega()
-    #     gamma = m.gamma()
-    #     result = vega[..., :-1]
-    #     expect = (
-    #         derivative.underlier.spot.square()
-    #         * derivative.underlier.volatility
-    #         * derivative.time_to_maturity()
-    #         * gamma
-    #     )[..., :-1]
-    #     assert_close(result, expect, atol=0, rtol=1e-4)
-    #
-    # @pytest.mark.gpu
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_vega_and_gamma_2_gpu(self, call: bool):
-    #     self.test_vega_and_gamma_2(call, device="cuda")
+    @pytest.mark.parametrize("call", [True, False])
+    def test_vega_and_gamma_2(
+        self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
+    ):
+        derivative = EuropeanBinaryOption(BrownianStock(), call=call).to(device)
+        m = BSEuropeanBinaryOption.from_derivative(derivative).to(device)
+        torch.manual_seed(42)
+        derivative.simulate(n_paths=1)
+        vega = m.vega()
+        gamma = m.gamma()
+        result = vega[..., :-1]
+        expect = (
+            derivative.underlier.spot.square()
+            * derivative.underlier.volatility
+            * derivative.time_to_maturity()
+            * gamma
+        )[..., :-1]
+        assert_close(result, expect, atol=0, rtol=1e-4)
+
+    @pytest.mark.gpu
+    @pytest.mark.parametrize("call", [True, False])
+    def test_vega_and_gamma_2_gpu(self, call: bool):
+        self.test_vega_and_gamma_2(call, device="cuda")
 
     # @pytest.mark.parametrize("call", [True, False])
     # def test_theta_2(
