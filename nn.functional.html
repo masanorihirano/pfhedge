@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="pfhedge.nn.functional.european_payoff" href="generated/pfhedge.nn.functional.european_payoff.html" /><link rel="prev" title="SVIVariance" href="generated/pfhedge.nn.SVIVariance.html" />
 
-    <meta name="generator" content="sphinx-4.4.0, furo 2021.11.23"/>
+    <meta name="generator" content="sphinx-4.5.0, furo 2021.11.23"/>
         <title>pfhedge.nn.functional - PFHedge documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=7f0192ddeb2adecfbaa87ffbcf67d16358b30bc1" />
@@ -189,32 +189,58 @@
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.american_binary_payoff.html">pfhedge.nn.functional.american_binary_payoff</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.european_binary_payoff.html">pfhedge.nn.functional.european_binary_payoff</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.european_forward_start_payoff.html">pfhedge.nn.functional.european_forward_start_payoff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.leaky_clamp.html">pfhedge.nn.functional.leaky_clamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.clamp.html">pfhedge.nn.functional.clamp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.exp_utility.html">pfhedge.nn.functional.exp_utility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.isoelastic_utility.html">pfhedge.nn.functional.isoelastic_utility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.entropic_risk_measure.html">pfhedge.nn.functional.entropic_risk_measure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.expected_shortfall.html">pfhedge.nn.functional.expected_shortfall</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.value_at_risk.html">pfhedge.nn.functional.value_at_risk</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.leaky_clamp.html">pfhedge.nn.functional.leaky_clamp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.clamp.html">pfhedge.nn.functional.clamp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.topp.html">pfhedge.nn.functional.topp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.realized_variance.html">pfhedge.nn.functional.realized_variance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.realized_volatility.html">pfhedge.nn.functional.realized_volatility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.terminal_value.html">pfhedge.nn.functional.terminal_value</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.ncdf.html">pfhedge.nn.functional.ncdf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.npdf.html">pfhedge.nn.functional.npdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_price.html">pfhedge.nn.functional.bs_european_price</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_delta.html">pfhedge.nn.functional.bs_european_delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_gamma.html">pfhedge.nn.functional.bs_european_gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_vega.html">pfhedge.nn.functional.bs_european_vega</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_theta.html">pfhedge.nn.functional.bs_european_theta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_american_binary_price.html">pfhedge.nn.functional.bs_american_binary_price</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_american_binary_delta.html">pfhedge.nn.functional.bs_american_binary_delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_american_binary_gamma.html">pfhedge.nn.functional.bs_american_binary_gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_american_binary_vega.html">pfhedge.nn.functional.bs_american_binary_vega</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_american_binary_theta.html">pfhedge.nn.functional.bs_american_binary_theta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_binary_price.html">pfhedge.nn.functional.bs_european_binary_price</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_binary_delta.html">pfhedge.nn.functional.bs_european_binary_delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_binary_gamma.html">pfhedge.nn.functional.bs_european_binary_gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_binary_vega.html">pfhedge.nn.functional.bs_european_binary_vega</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_binary_theta.html">pfhedge.nn.functional.bs_european_binary_theta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_lookback_price.html">pfhedge.nn.functional.bs_lookback_price</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_lookback_delta.html">pfhedge.nn.functional.bs_lookback_delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_lookback_gamma.html">pfhedge.nn.functional.bs_lookback_gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_lookback_vega.html">pfhedge.nn.functional.bs_lookback_vega</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bs_lookback_theta.html">pfhedge.nn.functional.bs_lookback_theta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.bilerp.html">pfhedge.nn.functional.bilerp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.box_muller.html">pfhedge.nn.functional.box_muller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.d1.html">pfhedge.nn.functional.d1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.d2.html">pfhedge.nn.functional.d2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.ncdf.html">pfhedge.nn.functional.ncdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.npdf.html">pfhedge.nn.functional.npdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.pl.html">pfhedge.nn.functional.pl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.realized_variance.html">pfhedge.nn.functional.realized_variance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.realized_volatility.html">pfhedge.nn.functional.realized_volatility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.svi_variance.html">pfhedge.nn.functional.svi_variance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.terminal_value.html">pfhedge.nn.functional.terminal_value</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.nn.functional.topp.html">pfhedge.nn.functional.topp</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="instruments.html">pfhedge.instruments</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.instruments.BaseInstrument.html">BaseInstrument</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.instruments.BasePrimary.html">BasePrimary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.instruments.BaseDerivative.html">BaseDerivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.instruments.OptionMixin.html">OptionMixin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.instruments.BaseOption.html">BaseOption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.instruments.BrownianStock.html">BrownianStock</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.instruments.HestonStock.html">HestonStock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.instruments.LocalVolatilityStock.html">LocalVolatilityStock</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.instruments.CIRRate.html">CIRRate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.instruments.VasicekRate.html">VasicekRate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.instruments.AmericanBinaryOption.html">AmericanBinaryOption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.instruments.EuropeanBinaryOption.html">EuropeanBinaryOption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.instruments.EuropeanForwardStartOption.html">EuropeanForwardStartOption</a></li>
@@ -225,14 +251,36 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="stochastic.html">pfhedge.stochastic</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.stochastic.generate_brownian.html">pfhedge.stochastic.generate_brownian</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.stochastic.generate_geometric_brownian.html">pfhedge.stochastic.generate_geometric_brownian</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.stochastic.generate_cir.html">pfhedge.stochastic.generate_cir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.stochastic.generate_geometric_brownian.html">pfhedge.stochastic.generate_geometric_brownian</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.stochastic.generate_heston.html">pfhedge.stochastic.generate_heston</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.stochastic.generate_local_volatility_process.html">pfhedge.stochastic.generate_local_volatility_process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.stochastic.generate_vasicek.html">pfhedge.stochastic.generate_vasicek</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.stochastic.randn_antithetic.html">pfhedge.stochastic.randn_antithetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.stochastic.randn_sobol_boxmuller.html">pfhedge.stochastic.randn_sobol_boxmuller</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="autogreek.html">pfhedge.autogreek</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="features.html">pfhedge.features</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.get_feature.html">pfhedge.features.get_feature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.list_feature_names.html">pfhedge.features.list_feature_names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.Moneyness.html">Moneyness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.LogMoneyness.html">LogMoneyness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.MaxMoneyness.html">MaxMoneyness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.MaxLogMoneyness.html">MaxLogMoneyness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.Barrier.html">Barrier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.PrevHedge.html">PrevHedge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.TimeToMaturity.html">TimeToMaturity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.UnderlierSpot.html">UnderlierSpot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.Variance.html">Variance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.Volatility.html">Volatility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.Empty.html">Empty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.Ones.html">Ones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.Zeros.html">Zeros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.ModuleOutput.html">ModuleOutput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/pfhedge.features.FeatureList.html">FeatureList</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
@@ -241,6 +289,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="notes/adding_clause.html">Adding clause to derivative</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/instrument_attributes.html">Instrument dtype and device</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
@@ -276,7 +325,7 @@
 <h1>pfhedge.nn.functional<a class="headerlink" href="#pfhedge-nn-functional" title="Permalink to this headline">¶</a></h1>
 <section id="payoff-functions">
 <h2>Payoff Functions<a class="headerlink" href="#payoff-functions" title="Permalink to this headline">¶</a></h2>
-<div class="table-wrapper"><table class="longtable docutils align-default">
+<div class="table-wrapper"><table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%"/>
 <col style="width: 90%"/>
@@ -300,9 +349,26 @@
 </tbody>
 </table></div>
 </section>
+<section id="nonlinear-activation-functions">
+<h2>Nonlinear activation functions<a class="headerlink" href="#nonlinear-activation-functions" title="Permalink to this headline">¶</a></h2>
+<div class="table-wrapper"><table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%"/>
+<col style="width: 90%"/>
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.leaky_clamp.html#pfhedge.nn.functional.leaky_clamp" title="pfhedge.nn.functional.leaky_clamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">leaky_clamp</span></code></a></p></td>
+<td><p>Leakily clamp all elements in <code class="docutils literal notranslate"><span class="pre">input</span></code> into the range <span class="math notranslate nohighlight">\([\min, \max]\)</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.clamp.html#pfhedge.nn.functional.clamp" title="pfhedge.nn.functional.clamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clamp</span></code></a></p></td>
+<td><p>Clamp all elements in <code class="docutils literal notranslate"><span class="pre">input</span></code> into the range <span class="math notranslate nohighlight">\([\min, \max]\)</span>.</p></td>
+</tr>
+</tbody>
+</table></div>
+</section>
 <section id="criterion-functions">
 <h2>Criterion Functions<a class="headerlink" href="#criterion-functions" title="Permalink to this headline">¶</a></h2>
-<div class="table-wrapper"><table class="longtable docutils align-default">
+<div class="table-wrapper"><table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%"/>
 <col style="width: 90%"/>
@@ -326,37 +392,126 @@
 </tbody>
 </table></div>
 </section>
-<section id="other-functions">
-<h2>Other Functions<a class="headerlink" href="#other-functions" title="Permalink to this headline">¶</a></h2>
-<div class="table-wrapper"><table class="longtable docutils align-default">
+<section id="black-scholes-formulas">
+<h2>Black-Scholes formulas<a class="headerlink" href="#black-scholes-formulas" title="Permalink to this headline">¶</a></h2>
+<section id="european-option">
+<h3>European option<a class="headerlink" href="#european-option" title="Permalink to this headline">¶</a></h3>
+<div class="table-wrapper"><table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%"/>
 <col style="width: 90%"/>
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.leaky_clamp.html#pfhedge.nn.functional.leaky_clamp" title="pfhedge.nn.functional.leaky_clamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">leaky_clamp</span></code></a></p></td>
-<td><p>Leakily clamp all elements in <code class="docutils literal notranslate"><span class="pre">input</span></code> into the range <span class="math notranslate nohighlight">\([\min, \max]\)</span>.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_price.html#pfhedge.nn.functional.bs_european_price" title="pfhedge.nn.functional.bs_european_price"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_european_price</span></code></a></p></td>
+<td><p>Returns Black-Scholes price of a European option.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.clamp.html#pfhedge.nn.functional.clamp" title="pfhedge.nn.functional.clamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clamp</span></code></a></p></td>
-<td><p>Clamp all elements in <code class="docutils literal notranslate"><span class="pre">input</span></code> into the range <span class="math notranslate nohighlight">\([\min, \max]\)</span>.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_delta.html#pfhedge.nn.functional.bs_european_delta" title="pfhedge.nn.functional.bs_european_delta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_european_delta</span></code></a></p></td>
+<td><p>Returns Black-Scholes delta of a European option.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.topp.html#pfhedge.nn.functional.topp" title="pfhedge.nn.functional.topp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">topp</span></code></a></p></td>
-<td><p>Returns the largest <span class="math notranslate nohighlight">\(p * N\)</span> elements of the given input tensor, where <span class="math notranslate nohighlight">\(N\)</span> stands for the total number of elements in the input tensor.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_gamma.html#pfhedge.nn.functional.bs_european_gamma" title="pfhedge.nn.functional.bs_european_gamma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_european_gamma</span></code></a></p></td>
+<td><p>Returns Black-Scholes gamma of a European option.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.realized_variance.html#pfhedge.nn.functional.realized_variance" title="pfhedge.nn.functional.realized_variance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">realized_variance</span></code></a></p></td>
-<td><p>Returns the realized variance of the price.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_vega.html#pfhedge.nn.functional.bs_european_vega" title="pfhedge.nn.functional.bs_european_vega"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_european_vega</span></code></a></p></td>
+<td><p>Returns Black-Scholes vega of a European option.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.realized_volatility.html#pfhedge.nn.functional.realized_volatility" title="pfhedge.nn.functional.realized_volatility"><code class="xref py py-obj docutils literal notranslate"><span class="pre">realized_volatility</span></code></a></p></td>
-<td><p>Returns the realized volatility of the price.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_theta.html#pfhedge.nn.functional.bs_european_theta" title="pfhedge.nn.functional.bs_european_theta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_european_theta</span></code></a></p></td>
+<td><p>Returns Black-Scholes theta of a European option.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.terminal_value.html#pfhedge.nn.functional.terminal_value" title="pfhedge.nn.functional.terminal_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">terminal_value</span></code></a></p></td>
-<td><p>Returns the terminal portfolio value.</p></td>
+</tbody>
+</table></div>
+</section>
+<section id="american-binary-option">
+<h3>American binary option<a class="headerlink" href="#american-binary-option" title="Permalink to this headline">¶</a></h3>
+<div class="table-wrapper"><table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%"/>
+<col style="width: 90%"/>
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_american_binary_price.html#pfhedge.nn.functional.bs_american_binary_price" title="pfhedge.nn.functional.bs_american_binary_price"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_american_binary_price</span></code></a></p></td>
+<td><p>Returns Black-Scholes price of an American binary option.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.ncdf.html#pfhedge.nn.functional.ncdf" title="pfhedge.nn.functional.ncdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ncdf</span></code></a></p></td>
-<td><p>Returns a new tensor with the normal cumulative distribution function.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_american_binary_delta.html#pfhedge.nn.functional.bs_american_binary_delta" title="pfhedge.nn.functional.bs_american_binary_delta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_american_binary_delta</span></code></a></p></td>
+<td><p>Returns Black-Scholes delta of an American binary option.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.npdf.html#pfhedge.nn.functional.npdf" title="pfhedge.nn.functional.npdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">npdf</span></code></a></p></td>
-<td><p>Returns a new tensor with the normal distribution function.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_american_binary_gamma.html#pfhedge.nn.functional.bs_american_binary_gamma" title="pfhedge.nn.functional.bs_american_binary_gamma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_american_binary_gamma</span></code></a></p></td>
+<td><p>Returns Black-Scholes gamma of an American binary option.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_american_binary_vega.html#pfhedge.nn.functional.bs_american_binary_vega" title="pfhedge.nn.functional.bs_american_binary_vega"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_american_binary_vega</span></code></a></p></td>
+<td><p>Returns Black-Scholes vega of an American binary option.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_american_binary_theta.html#pfhedge.nn.functional.bs_american_binary_theta" title="pfhedge.nn.functional.bs_american_binary_theta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_american_binary_theta</span></code></a></p></td>
+<td><p>Returns Black-Scholes theta of an American binary option.</p></td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="european-binary-option">
+<h3>European binary option<a class="headerlink" href="#european-binary-option" title="Permalink to this headline">¶</a></h3>
+<div class="table-wrapper"><table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%"/>
+<col style="width: 90%"/>
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_binary_price.html#pfhedge.nn.functional.bs_european_binary_price" title="pfhedge.nn.functional.bs_european_binary_price"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_european_binary_price</span></code></a></p></td>
+<td><p>Returns Black-Scholes price of a European binary option.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_binary_delta.html#pfhedge.nn.functional.bs_european_binary_delta" title="pfhedge.nn.functional.bs_european_binary_delta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_european_binary_delta</span></code></a></p></td>
+<td><p>Returns Black-Scholes delta of a European binary option.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_binary_gamma.html#pfhedge.nn.functional.bs_european_binary_gamma" title="pfhedge.nn.functional.bs_european_binary_gamma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_european_binary_gamma</span></code></a></p></td>
+<td><p>Returns Black-Scholes gamma of a European binary option.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_binary_vega.html#pfhedge.nn.functional.bs_european_binary_vega" title="pfhedge.nn.functional.bs_european_binary_vega"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_european_binary_vega</span></code></a></p></td>
+<td><p>Returns Black-Scholes vega of a European binary option.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_european_binary_theta.html#pfhedge.nn.functional.bs_european_binary_theta" title="pfhedge.nn.functional.bs_european_binary_theta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_european_binary_theta</span></code></a></p></td>
+<td><p>Returns Black-Scholes theta of a European binary option.</p></td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="lookback-option">
+<h3>Lookback option<a class="headerlink" href="#lookback-option" title="Permalink to this headline">¶</a></h3>
+<div class="table-wrapper"><table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%"/>
+<col style="width: 90%"/>
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_lookback_price.html#pfhedge.nn.functional.bs_lookback_price" title="pfhedge.nn.functional.bs_lookback_price"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_lookback_price</span></code></a></p></td>
+<td><p>Returns Black-Scholes price of a lookback option.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_lookback_delta.html#pfhedge.nn.functional.bs_lookback_delta" title="pfhedge.nn.functional.bs_lookback_delta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_lookback_delta</span></code></a></p></td>
+<td><p>Returns Black-Scholes delta of a lookback option.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_lookback_gamma.html#pfhedge.nn.functional.bs_lookback_gamma" title="pfhedge.nn.functional.bs_lookback_gamma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_lookback_gamma</span></code></a></p></td>
+<td><p>Returns Black-Scholes gamma of a lookback option.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_lookback_vega.html#pfhedge.nn.functional.bs_lookback_vega" title="pfhedge.nn.functional.bs_lookback_vega"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_lookback_vega</span></code></a></p></td>
+<td><p>Returns Black-Scholes vega of a lookback option.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bs_lookback_theta.html#pfhedge.nn.functional.bs_lookback_theta" title="pfhedge.nn.functional.bs_lookback_theta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bs_lookback_theta</span></code></a></p></td>
+<td><p>Returns Black-Scholes theta of a lookback option.</p></td>
+</tr>
+</tbody>
+</table></div>
+</section>
+</section>
+<section id="other-functions">
+<h2>Other Functions<a class="headerlink" href="#other-functions" title="Permalink to this headline">¶</a></h2>
+<div class="table-wrapper"><table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%"/>
+<col style="width: 90%"/>
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.bilerp.html#pfhedge.nn.functional.bilerp" title="pfhedge.nn.functional.bilerp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bilerp</span></code></a></p></td>
+<td><p>Does a bilinear interpolation of four tensors based on a scalar or tensor weights and returns the resulting tensor.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.box_muller.html#pfhedge.nn.functional.box_muller" title="pfhedge.nn.functional.box_muller"><code class="xref py py-obj docutils literal notranslate"><span class="pre">box_muller</span></code></a></p></td>
+<td><p>Returns two tensors obtained by applying Box-Muller transformation to two input tensors.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.d1.html#pfhedge.nn.functional.d1" title="pfhedge.nn.functional.d1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">d1</span></code></a></p></td>
 <td><p>Returns <span class="math notranslate nohighlight">\(d_1\)</span> in the Black-Scholes formula.</p></td>
@@ -364,8 +519,29 @@
 <tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.d2.html#pfhedge.nn.functional.d2" title="pfhedge.nn.functional.d2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">d2</span></code></a></p></td>
 <td><p>Returns <span class="math notranslate nohighlight">\(d_2\)</span> in the Black-Scholes formula.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.svi_variance.html#pfhedge.nn.functional.svi_variance" title="pfhedge.nn.functional.svi_variance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">svi_variance</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.ncdf.html#pfhedge.nn.functional.ncdf" title="pfhedge.nn.functional.ncdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ncdf</span></code></a></p></td>
+<td><p>Returns a new tensor with the normal cumulative distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.npdf.html#pfhedge.nn.functional.npdf" title="pfhedge.nn.functional.npdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">npdf</span></code></a></p></td>
+<td><p>Returns a new tensor with the normal distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.pl.html#pfhedge.nn.functional.pl" title="pfhedge.nn.functional.pl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl</span></code></a></p></td>
+<td><p>Returns the final profit and loss of hedging.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.realized_variance.html#pfhedge.nn.functional.realized_variance" title="pfhedge.nn.functional.realized_variance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">realized_variance</span></code></a></p></td>
+<td><p>Returns the realized variance of the price.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.realized_volatility.html#pfhedge.nn.functional.realized_volatility" title="pfhedge.nn.functional.realized_volatility"><code class="xref py py-obj docutils literal notranslate"><span class="pre">realized_volatility</span></code></a></p></td>
+<td><p>Returns the realized volatility of the price.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.svi_variance.html#pfhedge.nn.functional.svi_variance" title="pfhedge.nn.functional.svi_variance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">svi_variance</span></code></a></p></td>
 <td><p>Returns variance in the SVI model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.terminal_value.html#pfhedge.nn.functional.terminal_value" title="pfhedge.nn.functional.terminal_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">terminal_value</span></code></a></p></td>
+<td><p>Alias for <a class="reference internal" href="generated/pfhedge.nn.functional.pl.html#pfhedge.nn.functional.pl" title="pfhedge.nn.functional.pl"><code class="xref py py-func docutils literal notranslate"><span class="pre">pfhedge.nn.functional.pl()</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pfhedge.nn.functional.topp.html#pfhedge.nn.functional.topp" title="pfhedge.nn.functional.topp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">topp</span></code></a></p></td>
+<td><p>Returns the largest <span class="math notranslate nohighlight">\(p * N\)</span> elements of the given input tensor, where <span class="math notranslate nohighlight">\(N\)</span> stands for the total number of elements in the input tensor.</p></td>
 </tr>
 </tbody>
 </table></div>
@@ -425,7 +601,15 @@
             <ul>
 <li><a class="reference internal" href="#">pfhedge.nn.functional</a><ul>
 <li><a class="reference internal" href="#payoff-functions">Payoff Functions</a></li>
+<li><a class="reference internal" href="#nonlinear-activation-functions">Nonlinear activation functions</a></li>
 <li><a class="reference internal" href="#criterion-functions">Criterion Functions</a></li>
+<li><a class="reference internal" href="#black-scholes-formulas">Black-Scholes formulas</a><ul>
+<li><a class="reference internal" href="#european-option">European option</a></li>
+<li><a class="reference internal" href="#american-binary-option">American binary option</a></li>
+<li><a class="reference internal" href="#european-binary-option">European binary option</a></li>
+<li><a class="reference internal" href="#lookback-option">Lookback option</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#other-functions">Other Functions</a></li>
 </ul>
 </li>

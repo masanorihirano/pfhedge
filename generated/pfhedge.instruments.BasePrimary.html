@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="BaseDerivative" href="pfhedge.instruments.BaseDerivative.html" /><link rel="prev" title="BaseInstrument" href="pfhedge.instruments.BaseInstrument.html" />
 
-    <meta name="generator" content="sphinx-4.4.0, furo 2021.11.23"/>
+    <meta name="generator" content="sphinx-4.5.0, furo 2021.11.23"/>
         <title>BasePrimary - PFHedge documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=7f0192ddeb2adecfbaa87ffbcf67d16358b30bc1" />
@@ -189,32 +189,58 @@
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.american_binary_payoff.html">pfhedge.nn.functional.american_binary_payoff</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.european_binary_payoff.html">pfhedge.nn.functional.european_binary_payoff</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.european_forward_start_payoff.html">pfhedge.nn.functional.european_forward_start_payoff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.leaky_clamp.html">pfhedge.nn.functional.leaky_clamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.clamp.html">pfhedge.nn.functional.clamp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.exp_utility.html">pfhedge.nn.functional.exp_utility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.isoelastic_utility.html">pfhedge.nn.functional.isoelastic_utility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.entropic_risk_measure.html">pfhedge.nn.functional.entropic_risk_measure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.expected_shortfall.html">pfhedge.nn.functional.expected_shortfall</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.value_at_risk.html">pfhedge.nn.functional.value_at_risk</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.leaky_clamp.html">pfhedge.nn.functional.leaky_clamp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.clamp.html">pfhedge.nn.functional.clamp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.topp.html">pfhedge.nn.functional.topp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.realized_variance.html">pfhedge.nn.functional.realized_variance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.realized_volatility.html">pfhedge.nn.functional.realized_volatility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.terminal_value.html">pfhedge.nn.functional.terminal_value</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.ncdf.html">pfhedge.nn.functional.ncdf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.npdf.html">pfhedge.nn.functional.npdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_european_price.html">pfhedge.nn.functional.bs_european_price</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_european_delta.html">pfhedge.nn.functional.bs_european_delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_european_gamma.html">pfhedge.nn.functional.bs_european_gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_european_vega.html">pfhedge.nn.functional.bs_european_vega</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_european_theta.html">pfhedge.nn.functional.bs_european_theta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_american_binary_price.html">pfhedge.nn.functional.bs_american_binary_price</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_american_binary_delta.html">pfhedge.nn.functional.bs_american_binary_delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_american_binary_gamma.html">pfhedge.nn.functional.bs_american_binary_gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_american_binary_vega.html">pfhedge.nn.functional.bs_american_binary_vega</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_american_binary_theta.html">pfhedge.nn.functional.bs_american_binary_theta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_european_binary_price.html">pfhedge.nn.functional.bs_european_binary_price</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_european_binary_delta.html">pfhedge.nn.functional.bs_european_binary_delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_european_binary_gamma.html">pfhedge.nn.functional.bs_european_binary_gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_european_binary_vega.html">pfhedge.nn.functional.bs_european_binary_vega</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_european_binary_theta.html">pfhedge.nn.functional.bs_european_binary_theta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_lookback_price.html">pfhedge.nn.functional.bs_lookback_price</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_lookback_delta.html">pfhedge.nn.functional.bs_lookback_delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_lookback_gamma.html">pfhedge.nn.functional.bs_lookback_gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_lookback_vega.html">pfhedge.nn.functional.bs_lookback_vega</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bs_lookback_theta.html">pfhedge.nn.functional.bs_lookback_theta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.bilerp.html">pfhedge.nn.functional.bilerp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.box_muller.html">pfhedge.nn.functional.box_muller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.d1.html">pfhedge.nn.functional.d1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.d2.html">pfhedge.nn.functional.d2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.ncdf.html">pfhedge.nn.functional.ncdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.npdf.html">pfhedge.nn.functional.npdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.pl.html">pfhedge.nn.functional.pl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.realized_variance.html">pfhedge.nn.functional.realized_variance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.realized_volatility.html">pfhedge.nn.functional.realized_volatility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.svi_variance.html">pfhedge.nn.functional.svi_variance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.terminal_value.html">pfhedge.nn.functional.terminal_value</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.nn.functional.topp.html">pfhedge.nn.functional.topp</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../instruments.html">pfhedge.instruments</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.BaseInstrument.html">BaseInstrument</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">BasePrimary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.BaseDerivative.html">BaseDerivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.OptionMixin.html">OptionMixin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.BaseOption.html">BaseOption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.BrownianStock.html">BrownianStock</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.HestonStock.html">HestonStock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.LocalVolatilityStock.html">LocalVolatilityStock</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.CIRRate.html">CIRRate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.VasicekRate.html">VasicekRate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.AmericanBinaryOption.html">AmericanBinaryOption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.EuropeanBinaryOption.html">EuropeanBinaryOption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.instruments.EuropeanForwardStartOption.html">EuropeanForwardStartOption</a></li>
@@ -225,14 +251,36 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../stochastic.html">pfhedge.stochastic</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.stochastic.generate_brownian.html">pfhedge.stochastic.generate_brownian</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pfhedge.stochastic.generate_geometric_brownian.html">pfhedge.stochastic.generate_geometric_brownian</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.stochastic.generate_cir.html">pfhedge.stochastic.generate_cir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.stochastic.generate_geometric_brownian.html">pfhedge.stochastic.generate_geometric_brownian</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.stochastic.generate_heston.html">pfhedge.stochastic.generate_heston</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.stochastic.generate_local_volatility_process.html">pfhedge.stochastic.generate_local_volatility_process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.stochastic.generate_vasicek.html">pfhedge.stochastic.generate_vasicek</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.stochastic.randn_antithetic.html">pfhedge.stochastic.randn_antithetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pfhedge.stochastic.randn_sobol_boxmuller.html">pfhedge.stochastic.randn_sobol_boxmuller</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../autogreek.html">pfhedge.autogreek</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../features.html">pfhedge.features</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.get_feature.html">pfhedge.features.get_feature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.list_feature_names.html">pfhedge.features.list_feature_names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.Moneyness.html">Moneyness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.LogMoneyness.html">LogMoneyness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.MaxMoneyness.html">MaxMoneyness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.MaxLogMoneyness.html">MaxLogMoneyness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.Barrier.html">Barrier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.PrevHedge.html">PrevHedge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.TimeToMaturity.html">TimeToMaturity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.UnderlierSpot.html">UnderlierSpot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.Variance.html">Variance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.Volatility.html">Volatility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.Empty.html">Empty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.Ones.html">Ones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.Zeros.html">Zeros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.ModuleOutput.html">ModuleOutput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfhedge.features.FeatureList.html">FeatureList</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
@@ -241,6 +289,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../notes/adding_clause.html">Adding clause to derivative</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/instrument_attributes.html">Instrument dtype and device</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
@@ -277,8 +326,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pfhedge.instruments.BasePrimary">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pfhedge.instruments.</span></span><span class="sig-name descname"><span class="pre">BasePrimary</span></span><a class="reference internal" href="../_modules/pfhedge/instruments/primary/base.html#BasePrimary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pfhedge.instruments.BasePrimary" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="pfhedge.instruments.BaseInstrument.html#pfhedge.instruments.BaseInstrument" title="pfhedge.instruments.base.BaseInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">pfhedge.instruments.base.BaseInstrument</span></code></a></p>
-<p>Base class for all primary instruments.</p>
+<dd><p>Base class for all primary instruments.</p>
 <p>A primary instrument is a basic financial instrument which is traded on a market
 and therefore the price is accessible as the market price.
 Examples include stocks, bonds, commodities, and currencies.</p>
@@ -286,7 +334,7 @@ Examples include stocks, bonds, commodities, and currencies.</p>
 (See <a class="reference internal" href="pfhedge.instruments.BaseDerivative.html#pfhedge.instruments.BaseDerivative" title="pfhedge.instruments.BaseDerivative"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDerivative</span></code></a> for details).</p>
 <dl class="simple">
 <dt>Buffers:</dt><dd><ul class="simple">
-<li><p>spot (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>): The spot price of the instrument.</p></li>
+<li><p>spot (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.11.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>): The spot price of the instrument.</p></li>
 </ul>
 </dd>
 </dl>
@@ -389,6 +437,19 @@ all buffers will be copied to that device.</p>
 </dl>
 </dd></dl>
 <dl class="py method">
+<dt class="sig sig-object py" id="pfhedge.instruments.BasePrimary.get_buffer">
+<span class="sig-name descname"><span class="pre">get_buffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pfhedge/instruments/primary/base.html#BasePrimary.get_buffer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pfhedge.instruments.BasePrimary.get_buffer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the buffer given by target if it exists, otherwise throws an error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – the name of the buffer.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
 <dt class="sig sig-object py" id="pfhedge.instruments.BasePrimary.half">
 <span class="sig-name descname"><span class="pre">half</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pfhedge.instruments.BasePrimary.half" title="Permalink to this definition">¶</a></dt>
 <dd><p>Casts all floating point parameters and buffers to
@@ -443,7 +504,7 @@ where <code class="docutils literal notranslate"><span class="pre">n_steps</span
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>n_paths</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of paths to simulate.</p></li>
 <li><p><strong>time_horizon</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The period of time to simulate the price.</p></li>
-<li><p><strong>init_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – The initial state of
+<li><p><strong>init_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.11.0)"><em>torch.Tensor</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – The initial state of
 the instrument.
 If <code class="docutils literal notranslate"><span class="pre">None</span></code> (default), it uses the default value
 (See <a class="reference internal" href="#pfhedge.instruments.BasePrimary.default_init_state" title="pfhedge.instruments.BasePrimary.default_init_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_init_state</span></code></a>).</p></li>
@@ -468,7 +529,7 @@ If <code class="docutils literal notranslate"><span class="pre">None</span></cod
 <dt class="sig sig-object py" id="id2">
 <span class="sig-name descname"><span class="pre">to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instrument</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pfhedge/instruments/primary/base.html#BasePrimary.to"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-<p>Its signature is similar to <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module.to" title="(in PyTorch v1.10.0)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">torch.nn.Module.to()</span></code></a>.
+<p>Its signature is similar to <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module.to" title="(in PyTorch v1.11.0)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">torch.nn.Module.to()</span></code></a>.
 It only accepts floating point dtypes.
 See <a class="reference internal" href="../notes/instrument_attributes.html#instrument-attributes-doc"><span class="std std-ref">Instrument dtype and device</span></a> for details.</p>
 <div class="admonition note">
@@ -493,7 +554,7 @@ See <a class="reference internal" href="../notes/instrument_attributes.html#inst
 the buffers in this instrument.</p></li>
 <li><p><strong>device</strong> (<em>torch.device</em>) – The desired device of
 the buffers in this instrument.</p></li>
-<li><p><strong>tensor</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><em>torch.Tensor</em></a>) – Tensor whose dtype and device are
+<li><p><strong>tensor</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.11.0)"><em>torch.Tensor</em></a>) – Tensor whose dtype and device are
 the desired dtype and device of
 the buffers in this instrument.</p></li>
 <li><p><strong>instrument</strong> (<a class="reference internal" href="pfhedge.instruments.BaseInstrument.html#pfhedge.instruments.BaseInstrument" title="pfhedge.instruments.BaseInstrument"><em>BaseInstrument</em></a>) – Instrument whose dtype and device are
