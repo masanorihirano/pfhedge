@@ -553,54 +553,53 @@ class TestBSEuropeanBinaryOption(_TestBSModule):
     def test_theta_2_gpu(self, call: bool):
         self.test_theta_2(call, device="cuda")
 
-    #
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_theta_3(
-    #     self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
-    # ):
-    #     derivative = EuropeanBinaryOption(BrownianStock(), call=call).to(device)
-    #     m = BSEuropeanBinaryOption.from_derivative(derivative).to(device)
-    #     m2 = BSEuropeanBinaryOption(call=call).to(device)
-    #     with pytest.raises(AttributeError):
-    #         m.theta(None, torch.tensor(1).to(device), torch.tensor(2).to(device))
-    #     with pytest.raises(AttributeError):
-    #         m.theta(torch.tensor(1).to(device), None, torch.tensor(2).to(device))
-    #     with pytest.raises(AttributeError):
-    #         m.theta(torch.tensor(1).to(device), torch.tensor(2).to(device), None)
-    #     torch.manual_seed(42)
-    #     derivative.simulate(n_paths=1)
-    #     result = m.theta()
-    #     expect = m2.theta(
-    #         derivative.log_moneyness(),
-    #         derivative.time_to_maturity(),
-    #         derivative.underlier.volatility,
-    #     )
-    #     # ToDo: [..., :-1] should be removed
-    #     assert_close(result[..., :-1], expect[..., :-1])
-    #     result = m.theta(
-    #         None, derivative.time_to_maturity(), derivative.underlier.volatility
-    #     )
-    #     assert_close(result[..., :-1], expect[..., :-1])
-    #     result = m.theta(
-    #         derivative.log_moneyness(), None, derivative.underlier.volatility
-    #     )
-    #     assert_close(result[..., :-1], expect[..., :-1])
-    #     result = m.theta(
-    #         derivative.log_moneyness(), derivative.time_to_maturity(), None
-    #     )
-    #     assert_close(result[..., :-1], expect[..., :-1])
-    #     with pytest.raises(ValueError):
-    #         m2.theta(
-    #             None, derivative.time_to_maturity(), derivative.underlier.volatility
-    #         )
-    #     with pytest.raises(ValueError):
-    #         m2.theta(derivative.log_moneyness(), None, derivative.underlier.volatility)
-    #     with pytest.raises(ValueError):
-    #         m2.theta(derivative.log_moneyness(), derivative.time_to_maturity(), None)
-    #
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_theta_3_gpu(self, call: bool):
-    #     self.test_theta_3(call, device="cuda")
+    @pytest.mark.parametrize("call", [True, False])
+    def test_theta_3(
+        self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
+    ):
+        derivative = EuropeanBinaryOption(BrownianStock(), call=call).to(device)
+        m = BSEuropeanBinaryOption.from_derivative(derivative).to(device)
+        m2 = BSEuropeanBinaryOption(call=call).to(device)
+        with pytest.raises(AttributeError):
+            m.theta(None, torch.tensor(1).to(device), torch.tensor(2).to(device))
+        with pytest.raises(AttributeError):
+            m.theta(torch.tensor(1).to(device), None, torch.tensor(2).to(device))
+        with pytest.raises(AttributeError):
+            m.theta(torch.tensor(1).to(device), torch.tensor(2).to(device), None)
+        torch.manual_seed(42)
+        derivative.simulate(n_paths=1)
+        result = m.theta()
+        expect = m2.theta(
+            derivative.log_moneyness(),
+            derivative.time_to_maturity(),
+            derivative.underlier.volatility,
+        )
+        # ToDo: [..., :-1] should be removed
+        assert_close(result[..., :-1], expect[..., :-1])
+        result = m.theta(
+            None, derivative.time_to_maturity(), derivative.underlier.volatility
+        )
+        assert_close(result[..., :-1], expect[..., :-1])
+        result = m.theta(
+            derivative.log_moneyness(), None, derivative.underlier.volatility
+        )
+        assert_close(result[..., :-1], expect[..., :-1])
+        result = m.theta(
+            derivative.log_moneyness(), derivative.time_to_maturity(), None
+        )
+        assert_close(result[..., :-1], expect[..., :-1])
+        with pytest.raises(ValueError):
+            m2.theta(
+                None, derivative.time_to_maturity(), derivative.underlier.volatility
+            )
+        with pytest.raises(ValueError):
+            m2.theta(derivative.log_moneyness(), None, derivative.underlier.volatility)
+        with pytest.raises(ValueError):
+            m2.theta(derivative.log_moneyness(), derivative.time_to_maturity(), None)
+
+    @pytest.mark.parametrize("call", [True, False])
+    def test_theta_3_gpu(self, call: bool):
+        self.test_theta_3(call, device="cuda")
 
     # def test_price(self, device: Optional[Union[str, torch.device]] = "cpu"):
     #     m = BSEuropeanBinaryOption().to(device)
