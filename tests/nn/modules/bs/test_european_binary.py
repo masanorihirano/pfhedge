@@ -421,185 +421,185 @@ class TestBSEuropeanBinaryOption(_TestBSModule):
     def test_gamma_3_gpu(self, call: bool):
         self.test_gamma_3(call, device="cuda")
 
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_vega_valueerror(
-    #     self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
-    # ):
-    #     m = BSEuropeanBinaryOption(call=call).to(device)
-    #     with pytest.raises(ValueError):
-    #         m.vega(
-    #             torch.tensor(0.0).to(device),
-    #             torch.tensor(-1.0).to(device),
-    #             torch.tensor(0.2).to(device),
-    #         )
-    #     with pytest.raises(ValueError):
-    #         m.vega(
-    #             torch.tensor(0.0).to(device),
-    #             torch.tensor(1.0).to(device),
-    #             torch.tensor(-0.2).to(device),
-    #         )
-    #
-    # @pytest.mark.gpu
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_vega_valueerror_gpu(self, call: bool):
-    #     self.test_vega_valueerror(call, device="cuda")
-    #
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_vega_3(
-    #     self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
-    # ):
-    #     derivative = EuropeanBinaryOption(BrownianStock(), call=call).to(device)
-    #     m = BSEuropeanBinaryOption.from_derivative(derivative).to(device)
-    #     m2 = BSEuropeanBinaryOption(call=call).to(device)
-    #     with pytest.raises(AttributeError):
-    #         m.vega(None, torch.tensor(1).to(device), torch.tensor(2).to(device))
-    #     with pytest.raises(AttributeError):
-    #         m.vega(torch.tensor(1).to(device), None, torch.tensor(2).to(device))
-    #     with pytest.raises(AttributeError):
-    #         m.vega(torch.tensor(1).to(device), torch.tensor(2).to(device), None)
-    #     torch.manual_seed(42)
-    #     derivative.simulate(n_paths=1)
-    #     result = m.vega()
-    #     expect = m2.vega(
-    #         derivative.log_moneyness(),
-    #         derivative.time_to_maturity(),
-    #         derivative.underlier.volatility,
-    #     )
-    #     # ToDo: [..., :-1] should be removed
-    #     assert_close(result[..., :-1], expect[..., :-1])
-    #     result = m.vega(
-    #         None, derivative.time_to_maturity(), derivative.underlier.volatility
-    #     )
-    #     assert_close(result[..., :-1], expect[..., :-1])
-    #     result = m.vega(
-    #         derivative.log_moneyness(), None, derivative.underlier.volatility
-    #     )
-    #     assert_close(result[..., :-1], expect[..., :-1])
-    #     result = m.vega(derivative.log_moneyness(), derivative.time_to_maturity(), None)
-    #     assert_close(result[..., :-1], expect[..., :-1])
-    #     with pytest.raises(ValueError):
-    #         m2.vega(
-    #             None, derivative.time_to_maturity(), derivative.underlier.volatility
-    #         )
-    #     with pytest.raises(ValueError):
-    #         m2.vega(derivative.log_moneyness(), None, derivative.underlier.volatility)
-    #     with pytest.raises(ValueError):
-    #         m2.vega(derivative.log_moneyness(), derivative.time_to_maturity(), None)
-    #
-    # @pytest.mark.gpu
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_vega_3_gpu(self, call: bool):
-    #     self.test_vega_3(call, device="cuda")
-    #
-    # def test_vega_and_gamma(self, device: Optional[Union[str, torch.device]] = "cpu"):
-    #     m = BSEuropeanBinaryOption().to(device)
-    #     # vega = spot^2 * sigma * (T - t) * gamma
-    #     # See Chapter 5 Appendix A, Bergomi "Stochastic volatility modeling"
-    #     spot = torch.tensor([0.9, 1.0, 1.1]).to(device)
-    #     t = torch.tensor([0.1, 0.2, 0.3]).to(device)
-    #     v = torch.tensor([0.1, 0.2, 0.3]).to(device)
-    #     vega = m.vega(spot.log(), t, v)
-    #     gamma = m.gamma(spot.log(), t, v)
-    #     assert_close(vega, spot.square() * v * t * gamma, atol=1e-3, rtol=0)
-    #
-    # @pytest.mark.gpu
-    # def test_vega_and_gamma_gpu(self):
-    #     self.test_vega_and_gamma(device="cuda")
-    #
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_vega_and_gamma_2(
-    #     self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
-    # ):
-    #     derivative = EuropeanBinaryOption(BrownianStock(), call=call).to(device)
-    #     m = BSEuropeanBinaryOption.from_derivative(derivative).to(device)
-    #     torch.manual_seed(42)
-    #     derivative.simulate(n_paths=1)
-    #     vega = m.vega()
-    #     gamma = m.gamma()
-    #     result = vega[..., :-1]
-    #     expect = (
-    #         derivative.underlier.spot.square()
-    #         * derivative.underlier.volatility
-    #         * derivative.time_to_maturity()
-    #         * gamma
-    #     )[..., :-1]
-    #     assert_close(result, expect, atol=0, rtol=1e-4)
-    #
-    # @pytest.mark.gpu
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_vega_and_gamma_2_gpu(self, call: bool):
-    #     self.test_vega_and_gamma_2(call, device="cuda")
-    #
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_theta_2(
-    #     self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
-    # ):
-    #     m = BSEuropeanBinaryOption(call=call).to(device)
-    #     with pytest.raises(ValueError):
-    #         m.theta(
-    #             torch.tensor(0.0).to(device),
-    #             torch.tensor(-1.0).to(device),
-    #             torch.tensor(0.2).to(device),
-    #         )
-    #     with pytest.raises(ValueError):
-    #         m.theta(
-    #             torch.tensor(0.0).to(device),
-    #             torch.tensor(1.0).to(device),
-    #             torch.tensor(-0.2).to(device),
-    #         )
-    #
-    # @pytest.mark.gpu
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_theta_2_gpu(self, call: bool):
-    #     self.test_theta_2(call, device="cuda")
-    #
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_theta_3(
-    #     self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
-    # ):
-    #     derivative = EuropeanBinaryOption(BrownianStock(), call=call).to(device)
-    #     m = BSEuropeanBinaryOption.from_derivative(derivative).to(device)
-    #     m2 = BSEuropeanBinaryOption(call=call).to(device)
-    #     with pytest.raises(AttributeError):
-    #         m.theta(None, torch.tensor(1).to(device), torch.tensor(2).to(device))
-    #     with pytest.raises(AttributeError):
-    #         m.theta(torch.tensor(1).to(device), None, torch.tensor(2).to(device))
-    #     with pytest.raises(AttributeError):
-    #         m.theta(torch.tensor(1).to(device), torch.tensor(2).to(device), None)
-    #     torch.manual_seed(42)
-    #     derivative.simulate(n_paths=1)
-    #     result = m.theta()
-    #     expect = m2.theta(
-    #         derivative.log_moneyness(),
-    #         derivative.time_to_maturity(),
-    #         derivative.underlier.volatility,
-    #     )
-    #     # ToDo: [..., :-1] should be removed
-    #     assert_close(result[..., :-1], expect[..., :-1])
-    #     result = m.theta(
-    #         None, derivative.time_to_maturity(), derivative.underlier.volatility
-    #     )
-    #     assert_close(result[..., :-1], expect[..., :-1])
-    #     result = m.theta(
-    #         derivative.log_moneyness(), None, derivative.underlier.volatility
-    #     )
-    #     assert_close(result[..., :-1], expect[..., :-1])
-    #     result = m.theta(
-    #         derivative.log_moneyness(), derivative.time_to_maturity(), None
-    #     )
-    #     assert_close(result[..., :-1], expect[..., :-1])
-    #     with pytest.raises(ValueError):
-    #         m2.theta(
-    #             None, derivative.time_to_maturity(), derivative.underlier.volatility
-    #         )
-    #     with pytest.raises(ValueError):
-    #         m2.theta(derivative.log_moneyness(), None, derivative.underlier.volatility)
-    #     with pytest.raises(ValueError):
-    #         m2.theta(derivative.log_moneyness(), derivative.time_to_maturity(), None)
-    #
-    # @pytest.mark.parametrize("call", [True, False])
-    # def test_theta_3_gpu(self, call: bool):
-    #     self.test_theta_3(call, device="cuda")
+    @pytest.mark.parametrize("call", [True, False])
+    def test_vega_valueerror(
+        self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
+    ):
+        m = BSEuropeanBinaryOption(call=call).to(device)
+        with pytest.raises(ValueError):
+            m.vega(
+                torch.tensor(0.0).to(device),
+                torch.tensor(-1.0).to(device),
+                torch.tensor(0.2).to(device),
+            )
+        with pytest.raises(ValueError):
+            m.vega(
+                torch.tensor(0.0).to(device),
+                torch.tensor(1.0).to(device),
+                torch.tensor(-0.2).to(device),
+            )
+
+    @pytest.mark.gpu
+    @pytest.mark.parametrize("call", [True, False])
+    def test_vega_valueerror_gpu(self, call: bool):
+        self.test_vega_valueerror(call, device="cuda")
+
+    @pytest.mark.parametrize("call", [True, False])
+    def test_vega_3(
+        self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
+    ):
+        derivative = EuropeanBinaryOption(BrownianStock(), call=call).to(device)
+        m = BSEuropeanBinaryOption.from_derivative(derivative).to(device)
+        m2 = BSEuropeanBinaryOption(call=call).to(device)
+        with pytest.raises(AttributeError):
+            m.vega(None, torch.tensor(1).to(device), torch.tensor(2).to(device))
+        with pytest.raises(AttributeError):
+            m.vega(torch.tensor(1).to(device), None, torch.tensor(2).to(device))
+        with pytest.raises(AttributeError):
+            m.vega(torch.tensor(1).to(device), torch.tensor(2).to(device), None)
+        torch.manual_seed(42)
+        derivative.simulate(n_paths=1)
+        result = m.vega()
+        expect = m2.vega(
+            derivative.log_moneyness(),
+            derivative.time_to_maturity(),
+            derivative.underlier.volatility,
+        )
+        # ToDo: [..., :-1] should be removed
+        assert_close(result[..., :-1], expect[..., :-1])
+        result = m.vega(
+            None, derivative.time_to_maturity(), derivative.underlier.volatility
+        )
+        assert_close(result[..., :-1], expect[..., :-1])
+        result = m.vega(
+            derivative.log_moneyness(), None, derivative.underlier.volatility
+        )
+        assert_close(result[..., :-1], expect[..., :-1])
+        result = m.vega(derivative.log_moneyness(), derivative.time_to_maturity(), None)
+        assert_close(result[..., :-1], expect[..., :-1])
+        with pytest.raises(ValueError):
+            m2.vega(
+                None, derivative.time_to_maturity(), derivative.underlier.volatility
+            )
+        with pytest.raises(ValueError):
+            m2.vega(derivative.log_moneyness(), None, derivative.underlier.volatility)
+        with pytest.raises(ValueError):
+            m2.vega(derivative.log_moneyness(), derivative.time_to_maturity(), None)
+
+    @pytest.mark.gpu
+    @pytest.mark.parametrize("call", [True, False])
+    def test_vega_3_gpu(self, call: bool):
+        self.test_vega_3(call, device="cuda")
+
+    def test_vega_and_gamma(self, device: Optional[Union[str, torch.device]] = "cpu"):
+        m = BSEuropeanBinaryOption().to(device)
+        # vega = spot^2 * sigma * (T - t) * gamma
+        # See Chapter 5 Appendix A, Bergomi "Stochastic volatility modeling"
+        spot = torch.tensor([0.9, 1.0, 1.1]).to(device)
+        t = torch.tensor([0.1, 0.2, 0.3]).to(device)
+        v = torch.tensor([0.1, 0.2, 0.3]).to(device)
+        vega = m.vega(spot.log(), t, v)
+        gamma = m.gamma(spot.log(), t, v)
+        assert_close(vega, spot.square() * v * t * gamma, atol=1e-3, rtol=0)
+
+    @pytest.mark.gpu
+    def test_vega_and_gamma_gpu(self):
+        self.test_vega_and_gamma(device="cuda")
+
+    @pytest.mark.parametrize("call", [True, False])
+    def test_vega_and_gamma_2(
+        self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
+    ):
+        derivative = EuropeanBinaryOption(BrownianStock(), call=call).to(device)
+        m = BSEuropeanBinaryOption.from_derivative(derivative).to(device)
+        torch.manual_seed(42)
+        derivative.simulate(n_paths=1)
+        vega = m.vega()
+        gamma = m.gamma()
+        result = vega[..., :-1]
+        expect = (
+            derivative.underlier.spot.square()
+            * derivative.underlier.volatility
+            * derivative.time_to_maturity()
+            * gamma
+        )[..., :-1]
+        assert_close(result, expect, atol=0, rtol=1e-4)
+
+    @pytest.mark.gpu
+    @pytest.mark.parametrize("call", [True, False])
+    def test_vega_and_gamma_2_gpu(self, call: bool):
+        self.test_vega_and_gamma_2(call, device="cuda")
+
+    @pytest.mark.parametrize("call", [True, False])
+    def test_theta_2(
+        self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
+    ):
+        m = BSEuropeanBinaryOption(call=call).to(device)
+        with pytest.raises(ValueError):
+            m.theta(
+                torch.tensor(0.0).to(device),
+                torch.tensor(-1.0).to(device),
+                torch.tensor(0.2).to(device),
+            )
+        with pytest.raises(ValueError):
+            m.theta(
+                torch.tensor(0.0).to(device),
+                torch.tensor(1.0).to(device),
+                torch.tensor(-0.2).to(device),
+            )
+
+    @pytest.mark.gpu
+    @pytest.mark.parametrize("call", [True, False])
+    def test_theta_2_gpu(self, call: bool):
+        self.test_theta_2(call, device="cuda")
+
+    @pytest.mark.parametrize("call", [True, False])
+    def test_theta_3(
+        self, call: bool, device: Optional[Union[str, torch.device]] = "cpu"
+    ):
+        derivative = EuropeanBinaryOption(BrownianStock(), call=call).to(device)
+        m = BSEuropeanBinaryOption.from_derivative(derivative).to(device)
+        m2 = BSEuropeanBinaryOption(call=call).to(device)
+        with pytest.raises(AttributeError):
+            m.theta(None, torch.tensor(1).to(device), torch.tensor(2).to(device))
+        with pytest.raises(AttributeError):
+            m.theta(torch.tensor(1).to(device), None, torch.tensor(2).to(device))
+        with pytest.raises(AttributeError):
+            m.theta(torch.tensor(1).to(device), torch.tensor(2).to(device), None)
+        torch.manual_seed(42)
+        derivative.simulate(n_paths=1)
+        result = m.theta()
+        expect = m2.theta(
+            derivative.log_moneyness(),
+            derivative.time_to_maturity(),
+            derivative.underlier.volatility,
+        )
+        # ToDo: [..., :-1] should be removed
+        assert_close(result[..., :-1], expect[..., :-1])
+        result = m.theta(
+            None, derivative.time_to_maturity(), derivative.underlier.volatility
+        )
+        assert_close(result[..., :-1], expect[..., :-1])
+        result = m.theta(
+            derivative.log_moneyness(), None, derivative.underlier.volatility
+        )
+        assert_close(result[..., :-1], expect[..., :-1])
+        result = m.theta(
+            derivative.log_moneyness(), derivative.time_to_maturity(), None
+        )
+        assert_close(result[..., :-1], expect[..., :-1])
+        with pytest.raises(ValueError):
+            m2.theta(
+                None, derivative.time_to_maturity(), derivative.underlier.volatility
+            )
+        with pytest.raises(ValueError):
+            m2.theta(derivative.log_moneyness(), None, derivative.underlier.volatility)
+        with pytest.raises(ValueError):
+            m2.theta(derivative.log_moneyness(), derivative.time_to_maturity(), None)
+
+    @pytest.mark.parametrize("call", [True, False])
+    def test_theta_3_gpu(self, call: bool):
+        self.test_theta_3(call, device="cuda")
 
     # def test_price(self, device: Optional[Union[str, torch.device]] = "cpu"):
     #     m = BSEuropeanBinaryOption().to(device)
