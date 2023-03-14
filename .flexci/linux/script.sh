@@ -1,12 +1,8 @@
 #!/bin/bash
-# Thanks to https://github.com/pfnet/pytorch-pfn-extras/blob/master/.flexci/linux/script.sh
-
 # script.sh is a script to run Docker for testing.  This is called by CI like
 # "bash .flexci/linux/script.sh python39".
 #
 # Environment variables:
-# - PFHEDGE_FLEXCI_IMAGE_NAME ... The Docker image name (without tag) to be
-#       used for CI.
 # - DRYRUN ... Set DRYRUN=1 for local testing.  This disables destructive
 #       actions and make the script print commands.
 
@@ -15,9 +11,13 @@ set -eu
 
 # note: These values can be overridden per project using secret environment
 # variables of FlexCI.
-#PFHEDGE_FLEXCI_IMAGE_NAME=${PFHEDGE_FLEXCI_IMAGE_NAME:-asia-northeast1-docker.pkg.dev/pfn-artifactregistry/tmp-public-ci-dlfw/pfn-public-ci/pfhedge}
-PFHEDGE_FLEXCI_IMAGE_NAME=${PFHEDGE_FLEXCI_IMAGE_NAME:-asia-northeast1-docker.pkg.dev/pfn-artifactregistry/tmp}
 PFHEDGE_FLEXCI_GCS_BUCKET=${PFHEDGE_FLEXCI_GCS_BUCKET:-pfhedge-artifacts-pfn-public-ci}
+
+declare -A python_versions=(
+  ["python38"]="3.8.12"
+  ["python39"]="3.9.7"
+  ["python310"]="3.10.4"
+)
 
 ################################################################################
 # Main function
@@ -26,32 +26,27 @@ main() {
   TARGET="$1"
   SRC_ROOT="$(cd "$(dirname "${BASH_SOURCE}")/../.."; pwd)"
 
-  # Initialization.
-  prepare_docker &
-  wait
-
-  # Prepare docker args.
-  docker_args=(
-    docker run --rm --ipc=host --privileged --runtime=nvidia
-    --env CUDA_VISIBLE_DEVICES
-    --volume="${SRC_ROOT}:/src"
-    --volume="/tmp/output:/output"
-    --workdir="/src"
-  )
+  echo "TARGET: ${TARGET}"
+  echo "SRC_ROOT: ${SRC_ROOT}"
 
   # Run target-specific commands.
   case "${TARGET}" in
     python* )
+      python_version=${python_versions["${TARGET}"]}
+      # Prepare docker args.
+      docker_args=(
+        docker run --rm --ipc=host --privileged --runtime=nvidia
+        --env CUDA_VISIBLE_DEVICES
+        --env python_version=${python_version}
+        --volume="${SRC_ROOT}:/src"
+        --volume="/tmp/output:/output"
+        --workdir="/src"
+      )
       run "${docker_args[@]}" \
-          "${PFHEDGE_FLEXCI_IMAGE_NAME}:${TARGET}" \
+          "nvidia/cuda:12.0.1-cudnn8-devel-ubuntu20.04" \
           bash /src/.flexci/linux/test.sh
       gsutil -m -q cp -r /tmp/output/htmlcov gs://${PFHEDGE_FLEXCI_GCS_BUCKET}/pfhedge/pytest-cov/${CI_JOB_ID}/htmlcov
       echo "pytest-cov output: https://storage.googleapis.com/${PFHEDGE_FLEXCI_GCS_BUCKET}/pfhedge/pytest-cov/${CI_JOB_ID}/htmlcov/index.html"
-      ;;
-    prep )
-      # Build and push docker images for unit tests.
-      run "${SRC_ROOT}/.flexci/linux/build_and_push.sh" \
-          "${PFHEDGE_FLEXCI_IMAGE_NAME}"
       ;;
     * )
       echo "${TARGET}: Invalid target."
@@ -70,11 +65,6 @@ run() {
   if [ "${DRYRUN:-}" == '' ]; then
     "$@"
   fi
-}
-
-# Configure docker to pull images from gcr.io.
-prepare_docker() {
-  run gcloud auth configure-docker
 }
 
 ################################################################################
