@@ -24,7 +24,7 @@ jobs:
            git config --global user.email "github-actions[bot]@users.noreply.github.com"
            git config --global user.name "github-actions[bot]"
            git fetch origin ${{ github.event.pull_request.head.ref }}
-           git checkout main
+           git checkout hirano-master
            git tag -a `echo '${{ github.event.pull_request.head.ref }}' | sed 's/release\///'` -m " "
            git push origin `echo '${{ github.event.pull_request.head.ref }}' | sed 's/release\///'`
            git push --delete origin ${{ github.event.pull_request.head.ref }}
