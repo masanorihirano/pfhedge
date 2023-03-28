@@ -106,42 +106,78 @@ def test_value_at_risk_gpu():
     test_value_at_risk(device="cuda")
 
 
-def test_quadratic_cvar():
-    input = torch.arange(1.0, 11.0)
+def test_quadratic_cvar(device: str = "cpu"):
+    input = torch.arange(1.0, 11.0).to(device)
 
     result = quadratic_cvar(input, 2.0)
-    expect = torch.tensor(-2.025)
-    assert_close(result, expect)
-
-    input = torch.stack([torch.arange(1.0, 11.0), torch.arange(2.0, 12.0)], dim=0)
-
-    result = quadratic_cvar(input, 2.0, dim=1)
-    expect = torch.tensor([-2.025, -3.025])
-    assert_close(result, expect)
-
-
-def test_quadratic_cvar_extreme():
-    input = torch.arange(1.0, 11.0) + 1000
-
-    result = quadratic_cvar(input, 2.0)
-    expect = torch.tensor(-2.025 - 1000)
-    assert_close(result, expect)
-
-    input = (
-        torch.stack([torch.arange(1.0, 11.0), torch.arange(2.0, 12.0)], dim=0) - 1000
-    )
-
-    result = quadratic_cvar(input, 2.0, dim=1)
-    expect = torch.tensor([-2.025, -3.025]) + 1000
+    expect = torch.tensor(-2.025).to(device)
     assert_close(result, expect)
 
     input = torch.stack(
-        [torch.arange(1.0, 11.0) - 100000, torch.arange(1.0, 11.0) + 100000], dim=0
+        [torch.arange(1.0, 11.0).to(device), torch.arange(2.0, 12.0).to(device)], dim=0
+    )
+
+    result = quadratic_cvar(input, 2.0, dim=1)
+    expect = torch.tensor([-2.025, -3.025]).to(device)
+    assert_close(result, expect)
+
+
+@pytest.mark.gpu
+def test_quadratic_cvar_gpu():
+    test_quadratic_cvar(device="cuda")
+
+
+def test_quadratic_cvar_extreme(device: str = "cpu"):
+    input = torch.arange(1.0, 11.0).to(device) + 1000
+
+    result = quadratic_cvar(input, 2.0)
+    expect = torch.tensor(-2.025 - 1000).to(device)
+    assert_close(result, expect)
+
+    input = (
+        torch.stack(
+            [torch.arange(1.0, 11.0).to(device), torch.arange(2.0, 12.0).to(device)],
+            dim=0,
+        )
+        - 1000
+    )
+
+    result = quadratic_cvar(input, 2.0, dim=1)
+    expect = torch.tensor([-2.025, -3.025]).to(device) + 1000
+    assert_close(result, expect)
+
+    input = torch.stack(
+        [
+            torch.arange(1.0, 11.0).to(device) - 100000,
+            torch.arange(1.0, 11.0).to(device) + 100000,
+        ],
+        dim=0,
     )
     quadratic_cvar(input, 10.0, dim=1)
 
-    input = torch.randn(1000) * 100000 - 50000
+    input = torch.randn(1000).to(device) * 100000 - 50000
     quadratic_cvar(input, 10.0)
+
+
+@pytest.mark.gpu
+def test_quadratic_cvar_extreme_gpu():
+    test_quadratic_cvar_extreme(device="cuda")
+
+
+def test_value_at_risk(device: str = "cpu"):
+    input = -torch.arange(10.0).to(device)
+
+    assert_close(value_at_risk(input, 0.0), -torch.tensor(9.0).to(device))
+    assert_close(value_at_risk(input, 0.1), -torch.tensor(9.0).to(device))
+    assert_close(value_at_risk(input, 0.2), -torch.tensor(8.0).to(device))
+    assert_close(value_at_risk(input, 0.8), -torch.tensor(2.0).to(device))
+    assert_close(value_at_risk(input, 0.9), -torch.tensor(1.0).to(device))
+    assert_close(value_at_risk(input, 1.0), -torch.tensor(0.0).to(device))
+
+
+@pytest.mark.gpu
+def test_value_at_risk_gpu():
+    test_value_at_risk(device="cuda")
 
 
 def test_leaky_clamp(device: str = "cpu"):
