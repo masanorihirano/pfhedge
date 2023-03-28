@@ -3,6 +3,7 @@ on:
  pull_request:
    branches:
      - main
+     - hirano-master
    types:
      - closed
 jobs:
@@ -55,7 +56,8 @@ jobs:
         poetry install
     - name: release
       run: |
-        poetry publish --build --username __token__ --password ${{ secrets.PYPI_TOKEN }}
+        poetry config repositories.testpypi https://test.pypi.org/legacy/
+        poetry publish --build -r testpypi --username __token__ --password ${{ secrets.PYPI_TOKEN }}
     - name: Create release
       id: create_release
       uses: actions/create-release@v1
