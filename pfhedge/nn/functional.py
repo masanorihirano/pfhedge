@@ -350,19 +350,23 @@ def quadratic_cvar(input: Tensor, lam: float, dim: Optional[int] = None) -> Tens
         tensor([-0., -1., -2., -3., -4., -5., -6., -7., -8., -9.])
         >>> quadratic_cvar(input, 2.0)
         tensor(7.9750)
-    """
+    """  # NOQA
     output_target = torch.as_tensor(1 / (2 * lam))
     if dim:
         base = input.mean(dim=dim)
         input -= base.unsqueeze(dim=dim)
-        fn_target = lambda _omega: fn.relu(-_omega.unsqueeze(dim=dim) - input).mean(
-            dim=dim
-        )
+
+        def fn_target(_omega: Tensor) -> Tensor:
+            if not dim:
+                raise AssertionError("Unknown Error (dim is modified inappropriately.)")
+            return fn.relu(-_omega.unsqueeze(dim=dim) - input).mean(dim=dim)
 
     else:
         base = input.mean()
         input -= base
-        fn_target = lambda _omega: fn.relu(-_omega - input).mean()
+
+        def fn_target(_omega: Tensor) -> Tensor:
+            return fn.relu(-_omega - input).mean()
 
     lower = -_max_values(input, dim=dim) - 1e-8
     upper = -_min_values(input, dim=dim) + 1e-8
