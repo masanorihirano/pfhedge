@@ -1,6 +1,4 @@
 import contextlib
-from typing import Optional
-from typing import Union
 
 import pytest
 import torch
@@ -22,7 +20,7 @@ from pfhedge.nn.functional import topp
 from pfhedge.nn.functional import value_at_risk
 
 
-def test_exp_utility(device: Optional[Union[str, torch.device]] = "cpu"):
+def test_exp_utility(device: str = "cpu"):
     input = torch.tensor([-1.0, 0.0, 1.0], device=device)
 
     result = exp_utility(input, 1.0)
@@ -45,7 +43,7 @@ def test_exp_utility_gpu():
 
 @pytest.mark.parametrize("p", [0.0, 0.1, 0.5, 0.9, 1.0])
 @pytest.mark.parametrize("largest", [True, False])
-def test_topp(p, largest, device: Optional[Union[str, torch.device]] = "cpu"):
+def test_topp(p, largest, device: str = "cpu"):
     torch.manual_seed(42)
 
     input = torch.randn(100).to(device)
@@ -67,7 +65,7 @@ def test_topp_gpu(p, largest):
     test_topp(p, largest, device="cuda")
 
 
-def test_topp_error(device: Optional[Union[str, torch.device]] = "cpu"):
+def test_topp_error(device: str = "cpu"):
     with pytest.raises(RuntimeError):
         topp(torch.zeros(100).to(device), 1.1)
     with pytest.raises(RuntimeError):
@@ -79,7 +77,7 @@ def test_topp_error_gpu():
     test_topp_error(device="cuda")
 
 
-def test_expected_shortfall(device: Optional[Union[str, torch.device]] = "cpu"):
+def test_expected_shortfall(device: str = "cpu"):
     input = torch.arange(1.0, 6.0).to(device)
 
     result = expected_shortfall(input, 3 / 5)
@@ -92,7 +90,7 @@ def test_expected_shortfall_gpu():
     test_expected_shortfall(device="cuda")
 
 
-def test_value_at_risk(device: Optional[Union[str, torch.device]] = "cpu"):
+def test_value_at_risk(device: str = "cpu"):
     input = -torch.arange(10.0).to(device)
 
     assert_close(value_at_risk(input, 0.0), -torch.tensor(9.0).to(device))
@@ -146,7 +144,7 @@ def test_quadratic_cvar_extreme():
     quadratic_cvar(input, 10.0)
 
 
-def test_leaky_clamp(device: Optional[Union[str, torch.device]] = "cpu"):
+def test_leaky_clamp(device: str = "cpu"):
     input = torch.tensor([-1.0, 0.0, 0.5, 1.0, 2.0], device=device)
 
     result = leaky_clamp(input, 0, 1, clamped_slope=0.1)
@@ -183,9 +181,7 @@ def test_leaky_clamp_gpu():
     test_leaky_clamp(device="cuda")
 
 
-def test_clamp_error_invalid_inverted_output(
-    device: Optional[Union[str, torch.device]] = "cpu"
-):
+def test_clamp_error_invalid_inverted_output(device: str = "cpu"):
     input = torch.zeros(10).to(device)
     min = torch.zeros(10).to(device)
     max = torch.zeros(10).to(device)
@@ -204,7 +200,7 @@ def test_clamp_error_invalid_inverted_output_gpu():
     test_clamp_error_invalid_inverted_output(device="cuda")
 
 
-def test_realized_variance(device: Optional[Union[str, torch.device]] = "cpu"):
+def test_realized_variance(device: str = "cpu"):
     torch.manual_seed(42)
 
     log_return = 0.01 * torch.randn(2, 10).to(device)
@@ -223,7 +219,7 @@ def test_realized_variance_gpu():
     test_realized_variance(device="cuda")
 
 
-def test_realized_volatility(device: Optional[Union[str, torch.device]] = "cpu"):
+def test_realized_volatility(device: str = "cpu"):
     torch.manual_seed(42)
 
     log_return = 0.01 * torch.randn(2, 10).to(device)
@@ -242,7 +238,7 @@ def test_realized_volatility_gpu():
     test_realized_volatility(device="cuda")
 
 
-def test_pl(device: Optional[Union[str, torch.device]] = "cpu"):
+def test_pl(device: str = "cpu"):
     N, T = 10, 20
 
     # pl = -payoff if unit = 0
@@ -295,7 +291,7 @@ def test_pl_gpu():
     test_pl(device="cuda")
 
 
-def test_pl_unmatched_shape(device: Optional[Union[str, torch.device]] = "cpu"):
+def test_pl_unmatched_shape(device: str = "cpu"):
     spot = torch.zeros((10, 1, 20)).to(device)
     unit = torch.zeros((10, 1, 20)).to(device)
     payoff = torch.zeros(10).to(device)
@@ -312,7 +308,7 @@ def test_pl_unmatched_shape_gpu():
     test_pl_unmatched_shape(device="cuda")
 
 
-def test_pl_additional_dim(device: Optional[Union[str, torch.device]] = "cpu"):
+def test_pl_additional_dim(device: str = "cpu"):
     N, M, T = 10, 30, 20
 
     # pnl = -payoff if unit = 0
@@ -337,7 +333,7 @@ def test_d1(
     log_moneyness: float,
     time_to_maturity: float,
     volatility: float,
-    device: Optional[Union[str, torch.device]] = "cpu",
+    device: str = "cpu",
 ):
     with pytest.raises(
         ValueError
@@ -363,7 +359,7 @@ def test_d1_gpu(log_moneyness: float, time_to_maturity: float, volatility: float
     )
 
 
-def test_d1_2(device: Optional[Union[str, torch.device]] = "cpu"):
+def test_d1_2(device: str = "cpu"):
     results = d1(
         log_moneyness=torch.as_tensor([-1.0, 0, 1.0]).to(device),
         time_to_maturity=torch.as_tensor([1.0, 0, 0]).to(device),
@@ -397,7 +393,7 @@ def test_d2(
     log_moneyness: float,
     time_to_maturity: float,
     volatility: float,
-    device: Optional[Union[str, torch.device]] = "cpu",
+    device: str = "cpu",
 ):
     with pytest.raises(
         ValueError
@@ -423,7 +419,7 @@ def test_d2_gpu(log_moneyness: float, time_to_maturity: float, volatility: float
     )
 
 
-def test_d2_2(device: Optional[Union[str, torch.device]] = "cpu"):
+def test_d2_2(device: str = "cpu"):
     results = d2(
         log_moneyness=torch.as_tensor([-1.0, 0, 1.0]).to(device),
         time_to_maturity=torch.as_tensor([1.0, 0, 0]).to(device),
@@ -450,7 +446,7 @@ def test_d2_2_gpu():
     test_d2_2(device="cuda")
 
 
-def test_bilerp(device: Optional[Union[str, torch.device]] = "cpu"):
+def test_bilerp(device: str = "cpu"):
     torch.manual_seed(42)
 
     i1 = torch.randn(2, 3).to(device)
@@ -483,7 +479,7 @@ def test_bilerp_gpu():
     test_bilerp(device="cuda")
 
 
-def test_box_muller(device: Optional[Union[str, torch.device]] = "cpu"):
+def test_box_muller(device: str = "cpu"):
     torch.manual_seed(42)
 
     # correct radius
