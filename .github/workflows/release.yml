@@ -1,3 +1,20 @@
+# `release` workflow configuration
+#
+# This workflow is triggered when a release branch is merged into the main
+# branch. It automates the process of creating a package and releasing it to
+# GitHub and PyPI.
+#
+# Workflow steps:
+# 0. A release branch named release/[TAG] is merged into main via a pull
+#    request.
+# 1. `tagging` job runs:
+#     - A branch named [TAG] is created
+# 2. `release` job runs:
+#     - Create a PyPI package
+#     - Create a release on GitHub
+#     - Release the package on PyPI
+# 3. `delete-branch` job runs:
+#     - Delete the release branch .
 name: Release
 on:
  pull_request:
@@ -9,45 +26,44 @@ on:
 jobs:
   tagging:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
+    if: |
+      github.event.pull_request.merged == true
+      && startsWith(github.event.pull_request.head.ref, 'release/')
     steps:
-       - name: Get the version
+       - name: Determine the tag name based on the branch name
          id: get_version
          run: |
-           echo "TAG=`echo $SOURCE_VERSION | cut -d / -f 2`" >> $GITHUB_OUTPUT
+           echo "TAG=$(echo $BRANCH | cut -d / -f 2)" >> $GITHUB_OUTPUT
          env:
-           SOURCE_VERSION: ${{ github.event.pull_request.head.ref }}
-         #memo: extract version name from branch name (release/x.y.x -> x.y.z) and register it to steps.get_version.outputs.TAG
-       - name: Echo tag
-         run: echo ${{ steps.get_version.outputs.TAG }}
-         #memo: echo release version for debugging
+           BRANCH: ${{ github.event.pull_request.head.ref }}
+       - name: Print the tag name for debugging
+         run: echo "${{ steps.get_version.outputs.TAG }}"
        - uses: actions/checkout@v2
-       - run: |
+       - name: Create a corresponding tag branch
+         run: |
            git config --global user.email "github-actions[bot]@users.noreply.github.com"
            git config --global user.name "github-actions[bot]"
            git fetch origin ${{ github.event.pull_request.head.ref }}
            git checkout hirano-master
            git tag -a `echo '${{ github.event.pull_request.head.ref }}' | sed 's/release\///'` -m " "
            git push origin `echo '${{ github.event.pull_request.head.ref }}' | sed 's/release\///'`
-         #memo: push tag to the head of the branch as github action bot user
 
   release:
     name: release
     runs-on: ubuntu-latest
     needs: [tagging]
     strategy:
+      # NOTE: Only one version should be set (It is aimed to reduce the cost to change versions)
       matrix:
         python-version: ['3.9']
-      #memo: only one version should be set. This matrix is used to reduce the maintenance cost to change version
 
     steps:
-    - name: Get the version
+    - name: Determine the tag name based on the branch name
       id: get_version
       run: |
-        echo "TAG=`echo $SOURCE_VERSION | cut -d / -f 2`" >> $GITHUB_OUTPUT
+        echo "TAG=$(echo $BRANCH | cut -d / -f 2)" >> $GITHUB_OUTPUT
       env:
-        SOURCE_VERSION: ${{ github.event.pull_request.head.ref }}
-      #memo: extract version name from branch name (release/x.y.x -> x.y.z) and register it to steps.get_version.outputs.TAG
+        BRANCH: ${{ github.event.pull_request.head.ref }}
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2.2.2
@@ -58,10 +74,10 @@ jobs:
         python -m pip install --upgrade pip setuptools wheel
         python -m pip install poetry
         poetry install
-    - name: Create build
+    - name: Build the package
       run: |
         poetry build
-    - name: Create release
+    - name: Push a release to GitHub
       id: create_release
       uses: actions/create-release@v1
       env:
@@ -82,7 +98,7 @@ jobs:
       run: |
         cd dist; sha256sum * > checksums.txt; cd -
       #memo: make check sum for all elements in dist
-    - name: Upload tar.gz
+    - name: Attach an archive of source files to the release
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -91,7 +107,7 @@ jobs:
         asset_path: dist/pfhedge-${{ steps.get_version.outputs.TAG }}.tar.gz
         asset_name: pfhedge-${{ steps.get_version.outputs.TAG }}.tar.gz
         asset_content_type: application/gzip
-    - name: Upload whl
+    - name: Attach a Python wheel to the release
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -100,7 +116,7 @@ jobs:
         asset_path: dist/pfhedge-${{ steps.get_version.outputs.TAG }}-py3-none-any.whl
         asset_name: pfhedge-${{ steps.get_version.outputs.TAG }}-py3-none-any.whl
         asset_content_type: application/x-pywheel+zip
-    - name: Upload checksum
+    - name: Attach the checksum of the files to the release
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -109,7 +125,7 @@ jobs:
         asset_path: dist/checksums.txt
         asset_name: pfhedge-${{ steps.get_version.outputs.TAG }}-checksums.txt
         asset_content_type: text/plain
-    - name: Release to PyPI
+    - name: Release the version to PyPI
       run: |
         poetry config repositories.testpypi https://test.pypi.org/legacy/
         poetry publish -r testpypi --username __token__ --password ${{ secrets.PYPI_TOKEN }}
@@ -119,6 +135,6 @@ jobs:
     needs: [tagging, release]
     steps:
     - uses: actions/checkout@v2
-    - name: Delete branch
+    - name: Delete the release branch
       run: |
         git push --delete origin ${{ github.event.pull_request.head.ref }}
